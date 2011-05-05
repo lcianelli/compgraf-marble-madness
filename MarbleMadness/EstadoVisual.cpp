@@ -1,7 +1,6 @@
-#include "StdAfx.h"
 #include "EstadoVisual.h"
 
-state::~state(void)
+EstadoVisual::~EstadoVisual(void)
 {
 	this->loop = false;	
 }

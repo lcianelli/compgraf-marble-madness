@@ -2,7 +2,7 @@
 #ifndef ESTADO_VISUAL_H
 #define ESTADO_VISUAL_H
 
-class state {
+class EstadoVisual {
 public:
 	int refreshFreq; 
 	static const int FPS_30 = 30;
@@ -14,7 +14,7 @@ protected:
 	virtual void drawScreen() = 0;
 public:
 	virtual void run() = 0;
-	virtual ~state(void);
+	virtual ~EstadoVisual(void);
 };
 
 #endif
