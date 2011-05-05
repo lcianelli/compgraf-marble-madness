@@ -19,6 +19,8 @@ public:
 	Juego(void);
 	~Juego(void);
 	void setEstadoActual(EstadoVisual* estado);
+	void inicializar();
+	void iniciar();
 };
 
 #endif
