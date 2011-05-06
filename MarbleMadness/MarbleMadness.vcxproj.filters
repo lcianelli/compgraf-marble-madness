@@ -30,6 +30,15 @@
     <ClInclude Include="Juego.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Configuracion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ManejadorTextura.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PantallaNivel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +51,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Juego.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuracion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ManejadorTextura.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PantallaNivel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
