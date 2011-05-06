@@ -11,6 +11,7 @@ using namespace std;
 class Juego
 {
 private:
+
 	EstadoVisual* estadoActual;
 	map<string, EstadoVisual*> estados;
 	void cargarEstados();
