@@ -2,6 +2,7 @@
 #ifndef ESTADO_VISUAL_H
 #define ESTADO_VISUAL_H
 
+
 class EstadoVisual {
 public:
 	 

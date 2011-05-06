@@ -78,15 +78,21 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Configuracion.h" />
     <ClInclude Include="EstadoVisual.h" />
     <ClInclude Include="Juego.h" />
+    <ClInclude Include="ManejadorTextura.h" />
+    <ClInclude Include="PantallaNivel.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Configuracion.cpp" />
     <ClCompile Include="Juego.cpp" />
+    <ClCompile Include="ManejadorTextura.cpp" />
     <ClCompile Include="MarbleMadness.cpp" />
     <ClCompile Include="EstadoVisual.cpp" />
+    <ClCompile Include="PantallaNivel.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
