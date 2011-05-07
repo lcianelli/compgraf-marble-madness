@@ -7,6 +7,8 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 
+#include <iostream>
+
 #include "Juego.h"
 #include "EstadoVisual.h"
 

@@ -9,9 +9,17 @@ const GLfloat ZSPEED = 0.01;
 
 GLfloat xpos=0.f;
 GLfloat zpos=0.f;
+GLfloat ypos = 0.f;
 
 GLfloat alphaz = 0.f;
 GLfloat alphax = 0.f;
+
+bool saltar = false;
+const Uint32 T_SALTO = 500;//duracion del salto en ms
+Uint32 tiempoSaltoActual = 0;
+GLfloat Y_MAX = 1.f;
+GLfloat  A = -6.f/((T_SALTO+T_SALTO/2)*(T_SALTO/2));
+GLfloat B = -A*T_SALTO;
 
 void updateAlpha() {	
 	alphaz += (ticksIni - ticksFin) * xspeed * 20;
@@ -36,13 +44,14 @@ void PantallaNivel::dibujar() {
 	
 	glLoadIdentity();
 	
+	glEnable(GL_DEPTH_TEST);
 	
 	glTranslatef(0.f,0.f, -10.f);
 	
 	//Ponemos la camara con la pelotita.
-	gluLookAt(xpos, 1.f , zpos + 1.f, xpos, 0.f, zpos, 0.f, 1.f, 0.f); 
+	gluLookAt(xpos, 0.5f , zpos + 1.f, xpos, 0.f, zpos, 0.f, 1.f, 0.f); 
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_POLYGON);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_QUADS);
 	glColor3ub(0, 0, 255);	
 	int yaux = 0.f;
@@ -57,7 +66,7 @@ void PantallaNivel::dibujar() {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
 	glPushMatrix();
-		glTranslatef(xpos,0.f,zpos);
+		glTranslatef(xpos,ypos,zpos);
 
 		glRotatef(alphax,1.f,0.f,0.f);
 		glRotatef(alphaz,0.f,0.f,1.0);
@@ -77,10 +86,19 @@ void PantallaNivel::dibujar() {
 }
 
 void PantallaNivel::actualizar() {
+	Uint32 tiempoTranscurrido = ticksIni - ticksFin;
 	
 	xpos += (ticksIni - ticksFin)*xspeed;
 	zpos += (ticksIni - ticksFin)*zspeed;
 	updateAlpha();
+	if (saltar) {
+		ypos += (1.f*tiempoTranscurrido)*(2.f*A*tiempoSaltoActual+ A*tiempoTranscurrido+B);
+		cout << ypos << endl;
+		tiempoSaltoActual += tiempoTranscurrido;
+		if (tiempoSaltoActual >= T_SALTO) {
+			saltar = false;
+		}
+	}
 	ticksFin = ticksIni;
 }
 
@@ -124,6 +142,18 @@ void PantallaNivel::handleKeyDown(SDL_keysym* keysym) {
 			break;
 		case SDLK_DOWN:
 			zspeed = ZSPEED;
+			break;
+		case SDLK_a:
+			if (!saltar) {
+				saltar = true;
+				tiempoSaltoActual = 0;
+			}
+			break;
+		case SDLK_SPACE:
+			if (!saltar) {
+				saltar = true;
+				tiempoSaltoActual = 0;
+			}
 			break;
 		default:break;
 	}
