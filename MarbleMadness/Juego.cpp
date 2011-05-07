@@ -43,7 +43,7 @@ void Juego::inicializar(int w, int h) {
 		fprintf(stderr, "Failed to get video info: %s\n", SDL_GetError());
 		quitSDLApp(-1);
 	}
-	Uint32 glFlags = SDL_OPENGL | SDL_HWSURFACE | SDL_FULLSCREEN;
+	Uint32 glFlags = SDL_OPENGL | SDL_HWSURFACE ;
 	Uint8 bpp = info->vfmt->BitsPerPixel;
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
