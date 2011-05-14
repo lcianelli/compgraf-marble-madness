@@ -40,3 +40,7 @@ float* Bola::getFuerzaAplicada(ObjetoJuego* obj, float &modulo) {
 	return 0;
 }
 
+float* Bola::getNormalInteraccion(ObjetoJuego* obj) {
+	return 0;
+}
+
