@@ -4,8 +4,8 @@
 Uint32 ticksIni = 0, ticksFin = 0;
 
 GLfloat xspeed = 0, zspeed= 0;
-const GLfloat XSPEED = 0.01;
-const GLfloat ZSPEED = 0.01;
+const GLfloat XSPEED = 0.01f;
+const GLfloat ZSPEED = 0.01f;
 
 GLfloat xpos=0.f;
 GLfloat zpos=0.f;
@@ -54,7 +54,7 @@ void PantallaNivel::dibujar() {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_QUADS);
 	glColor3ub(0, 0, 255);	
-	int yaux = 0.f;
+	float yaux = 0.f;
 	glVertex3f(-2.f, -2.f, yaux);
 	glVertex3f(2.f,-2.f, yaux);
 	
