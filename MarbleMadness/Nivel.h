@@ -11,7 +11,8 @@
 class Nivel
 {
 private:
-	enum estado; 
+	enum estadoJuego {ganaste,perdiste,jugando,no_iniciado};
+	enum estadoJuego estado;
 	int numero;
 	int puntaje;		
 	
