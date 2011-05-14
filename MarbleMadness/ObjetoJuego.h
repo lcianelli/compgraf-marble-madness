@@ -30,8 +30,11 @@ public:
 	float modfuerza;// modfuerza == |fuerza|
 	Ambiente* ambiente;
 	float* masa;
+
+	float absorcionEnergia; //valor en el cual se reduce la velocidad de un objeto al chocar con este objeto.
 	/*Normaliza el vector vector de largo largov*/
 	void normalizar(float* vector, int largov);
+	float modulo(float* vector, int largov); 
 	virtual void dibujar() = 0;
 	virtual void actualizar(int tiempo) = 0;//tiempo = tiempo transcurrido desde ultimo update
 	virtual void actualizarFisica(int tiempo) = 0; //tiempo = tiempo transcurrido desde ultimo update
