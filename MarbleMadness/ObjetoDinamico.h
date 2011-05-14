@@ -3,11 +3,13 @@
 #define OBJETO_DINAMICO_H
 
 #include "ObjetoJuego.h"
+#include "ObjetoEstatico.h"
 
 class ObjetoDinamico :
 	public ObjetoJuego
 {
 protected:
+	ObjetoEstatico* piso;
 	/*
 		Dada la lista de objetos con las que en un momento dado interactuamos, esto recalcula los parámetros de velocidad y aceleración según 
 		la forma de interacción con cada objeto
