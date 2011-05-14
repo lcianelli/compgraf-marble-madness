@@ -50,6 +50,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\bullet-2.78\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -78,22 +79,34 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ambiente.h" />
+    <ClInclude Include="Bola.h" />
     <ClInclude Include="Configuracion.h" />
     <ClInclude Include="EstadoVisual.h" />
     <ClInclude Include="Juego.h" />
     <ClInclude Include="ManejadorTextura.h" />
+    <ClInclude Include="ObjetoJuego.h" />
     <ClInclude Include="PantallaNivel.h" />
+    <ClInclude Include="Prisma.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ambiente.cpp" />
+    <ClCompile Include="Bola.cpp" />
     <ClCompile Include="Configuracion.cpp" />
     <ClCompile Include="Juego.cpp" />
     <ClCompile Include="ManejadorTextura.cpp" />
     <ClCompile Include="MarbleMadness.cpp" />
     <ClCompile Include="EstadoVisual.cpp" />
+    <ClCompile Include="ObjetoJuego.cpp" />
     <ClCompile Include="PantallaNivel.cpp" />
+    <ClCompile Include="Prisma.cpp" />
     <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MarbleMadness.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
