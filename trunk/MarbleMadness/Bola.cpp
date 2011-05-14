@@ -31,6 +31,6 @@ void Bola::interactuar(list<ObjetoJuego*> interactores) {
 }
 
 float* Bola::getFuerzaAplicada(ObjetoJuego* obj, float &modulo) {
-
+	return 0;
 }
 

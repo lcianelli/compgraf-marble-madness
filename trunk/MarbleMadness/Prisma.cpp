@@ -29,5 +29,5 @@ void Prisma::interactuar(list<ObjetoJuego*> interactores) {
 
 
 float* Prisma::getFuerzaAplicada(ObjetoJuego* obj, float &modulo) {
-
+	return 0;
 }
