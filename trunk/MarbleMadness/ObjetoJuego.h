@@ -22,6 +22,12 @@ protected:
 		Retorna el vector unitario de direccion y sentido de la fuerza que aplica este objeto sobre "obj"; el modulo real de la fuerza se retorna en "modulo"
 	*/
 	virtual float* getFuerzaAplicada(ObjetoJuego* obj, float &modulo) = 0;
+
+	/**
+		Retorna un vector unitario que representa la normal del objeto actual respecto de obj (es decir, la normal a la cara con la que obj "interactua"
+	*/
+	virtual float* getNormalInteraccion(ObjetoJuego* obj) = 0;
+	
 public:
 	float* direccion;
 	float* velocidad;
@@ -32,13 +38,15 @@ public:
 	float* masa;
 
 	float absorcionEnergia; //valor en el cual se reduce la velocidad de un objeto al chocar con este objeto.
-	/*Normaliza el vector vector de largo largov*/
-	void normalizar(float* vector, int largov);
-	float modulo(float* vector, int largov); 
+	
 	virtual void dibujar() = 0;
 	virtual void actualizar(int tiempo) = 0;//tiempo = tiempo transcurrido desde ultimo update
 	virtual void actualizarFisica(int tiempo) = 0; //tiempo = tiempo transcurrido desde ultimo update
 	
+
+	/*Normaliza el vector vector de largo largov*/
+	void normalizar(float* vector, int largov);
+	float modulo(float* vector, int largov); 
 
 	virtual ~ObjetoJuego(void);
 };

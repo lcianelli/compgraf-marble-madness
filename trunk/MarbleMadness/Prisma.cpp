@@ -30,9 +30,19 @@ void Prisma::interactuar(list<ObjetoJuego*> interactores) {
 
 float* Prisma::getFuerzaAplicada(ObjetoJuego* obj, float &modulo) {
 	float* fuerzaAplicada = new float[3];
-	fuerzaAplicada[0] = -1.f*obj->fuerza[0];
-	fuerzaAplicada[1] = -1.f*obj->fuerza[1];
-	fuerzaAplicada[2] = -1.f*obj->fuerza[2];
+	float* reaccion = getNormalInteraccion(obj);
+	
+	
 	modulo = obj->modfuerza;
 	return fuerza;
+}
+
+
+float* Prisma::getNormalInteraccion(ObjetoJuego* obj) {
+	float * normal = new float[3];
+
+	//TODO: almacenar en "normal" los datos de la normal a la cara con la que obj interactua, en la misma direccion desde la que obj "golpea"
+
+	normalizar(normal, 3);
+	return normal;	
 }

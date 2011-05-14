@@ -5,7 +5,7 @@
 //
 //For use with OpenGL and the FreeImage library
 //**********************************************
-#include "StdAfx.h"
+
 #include "ManejadorTextura.h"
 
 TextureManager* TextureManager::m_inst(0);
