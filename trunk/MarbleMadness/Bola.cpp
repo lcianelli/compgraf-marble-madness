@@ -21,13 +21,19 @@ void Bola::actualizarFisica(int tiempo) {
 }
 
 void Bola::interactuar(list<ObjetoJuego*> interactores) {
-	float* fuerza = new float[3];
+	float* fuerzaTotal = new float[3];
 	list<ObjetoJuego*>::iterator it;
 	for (it = interactores.begin(); it != interactores.end(); it++) {
 
 	}
 
-	delete[] fuerza;
+	//actualizamos ahora las fuerzas actuantes sobre el objeto
+	this->modfuerza = modulo(fuerzaTotal, 3);
+	normalizar(fuerzaTotal, 3);
+	for (int i = 0; i < 3; i++) {
+		this->fuerza[i] = fuerzaTotal[i];
+	}
+	delete[] fuerzaTotal;
 }
 
 float* Bola::getFuerzaAplicada(ObjetoJuego* obj, float &modulo) {

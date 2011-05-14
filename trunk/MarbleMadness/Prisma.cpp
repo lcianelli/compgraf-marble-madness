@@ -29,5 +29,10 @@ void Prisma::interactuar(list<ObjetoJuego*> interactores) {
 
 
 float* Prisma::getFuerzaAplicada(ObjetoJuego* obj, float &modulo) {
-	return 0;
+	float* fuerzaAplicada = new float[3];
+	fuerzaAplicada[0] = -1.f*obj->fuerza[0];
+	fuerzaAplicada[1] = -1.f*obj->fuerza[1];
+	fuerzaAplicada[2] = -1.f*obj->fuerza[2];
+	modulo = obj->modfuerza;
+	return fuerza;
 }
