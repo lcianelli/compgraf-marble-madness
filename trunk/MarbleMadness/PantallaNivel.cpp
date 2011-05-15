@@ -29,6 +29,8 @@ void updateAlpha() {
 
 PantallaNivel::PantallaNivel(void)
 {
+
+
 }
 
 
@@ -123,6 +125,8 @@ void PantallaNivel::procesarEventos() {
 
 void PantallaNivel::inicializar() {
 	this->loop = true;
+	this->idNivel=1;
+	this->nivelActual=new Nivel(this->idNivel);
 }
 
 void PantallaNivel::handleKeyDown(SDL_keysym* keysym) {
@@ -186,4 +190,11 @@ void PantallaNivel::handleKeyUp(SDL_keysym* keysym) {
 		default:break;
 	}
 
+}
+
+void PantallaNivel::cambiarNivel()
+{
+	this->idNivel+=1;
+	delete this->nivelActual;
+	this->nivelActual=new Nivel(this->idNivel);
 }
