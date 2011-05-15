@@ -10,6 +10,7 @@
 #include <SDL_opengl.h>
 
 
+
 using namespace std;
 
 
@@ -20,6 +21,7 @@ private:
 	int w, h;
 	SDL_Surface* pantalla;
 	EstadoVisual* estadoActual;
+
 	//map<string, EstadoVisual*> estados;
 	Juego(void);
 	
@@ -38,6 +40,9 @@ public:
 	*/
 	void inicializar(int w, int h);
 	void iniciar();
+
+	void avanzarNivel();
+
 	~Juego(void);
 };
 
