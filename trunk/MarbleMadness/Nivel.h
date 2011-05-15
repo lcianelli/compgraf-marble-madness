@@ -1,18 +1,17 @@
 #pragma once
+
 #ifndef NIVEL_H
 #define NIVEL_H
 
-
-#include "Escenario.h";
-#include "FinEscenario.h";
-#include "InicioEscenario.h";
+#include "Escenario.h"
+#include "FinEscenario.h"
+#include "InicioEscenario.h"
 #include "Personaje.h"
 
 class Nivel
 {
 private:
-	enum estadoJuego {ganaste,perdiste,jugando,no_iniciado};
-	enum estadoJuego estado;
+	enum estado; 
 	int numero;
 	int puntaje;		
 	

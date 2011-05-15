@@ -18,13 +18,15 @@ void Bola::actualizar(int tiempo) {
 }
 
 void Bola::actualizarFisica(int tiempo) {
+	
+
 }
 
 void Bola::interactuar(list<ObjetoJuego*> interactores) {
 	float* fuerzaTotal = new float[3];
 	list<ObjetoJuego*>::iterator it;
 	for (it = interactores.begin(); it != interactores.end(); it++) {
-
+		
 	}
 
 	//actualizamos ahora las fuerzas actuantes sobre el objeto
@@ -44,3 +46,9 @@ float* Bola::getNormalInteraccion(ObjetoJuego* obj) {
 	return 0;
 }
 
+ObjetoEstatico* Bola::dondeEstoy() {
+
+	//TODO: obtener la posicion donde estoy en la grilla
+
+	return 0;
+}

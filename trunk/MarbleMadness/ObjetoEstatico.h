@@ -8,8 +8,8 @@ class ObjetoEstatico :
 	public ObjetoJuego
 {
 public:
-	ObjetoEstatico(void);
-	~ObjetoEstatico(void);
+	bool esEstatico();
+	virtual ~ObjetoEstatico(void);
 };
 
 #endif 

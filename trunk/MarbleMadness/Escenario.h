@@ -33,6 +33,7 @@ public:
 
 	void dibujar();
 	void actualizar(int tiempo);
+	void actualizarFisica(int tiempo);
 
 	~Escenario(void);
 };
