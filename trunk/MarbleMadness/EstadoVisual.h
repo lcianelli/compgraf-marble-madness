@@ -19,6 +19,7 @@ protected:
 	
 public:
 	virtual void inicializar() = 0;
+	virtual void cambiarNivel() = 0;
 	void correr();
 	void detener();
 	virtual ~EstadoVisual(void);
