@@ -23,6 +23,15 @@ void Escenario::actualizarFisica(int tiempo) {
 
 }
 
+void Escenario::dondeEstoy(float x, float z, int &t, int &s){
+	t=x/ANCHO_CELDA_GRILLA;
+	s=z/ANCHO_CELDA_GRILLA;
+}
+
+ObjetoJuego* Escenario::obtenerObjeto(int t, int s){
+	return this->grilla[t][s];
+}
+
 Escenario::~Escenario(void)
 {
 
