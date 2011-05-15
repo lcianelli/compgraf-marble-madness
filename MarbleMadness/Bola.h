@@ -24,6 +24,8 @@ public:
 	void dibujar();
 	void actualizar(int tiempo);//tiempo = tiempo transcurrido desde ultimo update
 	void actualizarFisica(int tiempo); //tiempo = tiempo transcurrido desde ultimo update
+
+	ObjetoEstatico* dondeEstoy();
 	Bola(void);
 	~Bola(void);
 };

@@ -1,7 +1,7 @@
 #include "ObjetoEstatico.h"
 
-ObjetoEstatico::ObjetoEstatico(void)
-{
+bool ObjetoEstatico::esEstatico() {
+	return true;
 }
 
 ObjetoEstatico::~ObjetoEstatico(void)

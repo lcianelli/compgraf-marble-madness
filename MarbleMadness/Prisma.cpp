@@ -3,7 +3,6 @@
 
 Prisma::Prisma(void)
 {
-	this->estatico = true;
 }
 
 

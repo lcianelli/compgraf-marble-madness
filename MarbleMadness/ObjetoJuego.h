@@ -9,9 +9,7 @@ using namespace std;
 
 class ObjetoJuego
 {
-protected: 
-	bool estatico;//marca si el objeto es estatico o no, es decir, si al hacerle update tenemos que cambiar su 
-	//posicion de acuerdo a su velocidad o no, así como si tenemos que tener en cuenta su aceleración para el update fisico
+protected: 	
 	
 	/*
 		Dada la lista de objetos con las que en un momento dado interactuamos, esto recalcula los parámetros de velocidad y aceleración según 
@@ -42,7 +40,7 @@ public:
 	virtual void dibujar() = 0;
 	virtual void actualizar(int tiempo) = 0;//tiempo = tiempo transcurrido desde ultimo update
 	virtual void actualizarFisica(int tiempo) = 0; //tiempo = tiempo transcurrido desde ultimo update
-	
+	virtual bool esEstatico() = 0; //Indica si este objeto es o no estatico
 
 	/*Normaliza el vector vector de largo largov*/
 	void normalizar(float* vector, int largov);

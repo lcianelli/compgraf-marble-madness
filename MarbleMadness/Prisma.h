@@ -26,11 +26,11 @@ public:
 	float froz;
 
 	Prisma(void);
-	~Prisma(void);
+	
 	void dibujar();
 	void actualizar(int tiempo);//tiempo = tiempo transcurrido desde ultimo update
 	void actualizarFisica(int tiempo); //tiempo = tiempo transcurrido desde ultimo update
-
+	~Prisma(void);
 };
 
 #endif

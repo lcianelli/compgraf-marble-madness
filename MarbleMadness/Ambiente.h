@@ -16,7 +16,6 @@ public:
 	*/
 	float modFuerzaExterna;
 
-
 	Ambiente(void);
 	~Ambiente(void);
 };
