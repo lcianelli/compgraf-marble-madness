@@ -10,6 +10,7 @@
 #include "ObjetoEstatico.h"
 #include "TipoObjeto.h"
 
+
 using namespace std;
 
 #define MATRIZ_SUELO_H 10
@@ -30,6 +31,8 @@ public:
 	void cargarObjeto(int t, int s, float objH, TipoObjeto tipo);
 	void dondeEstoy(float x, float z, int &t, int &s);
 	ObjetoJuego* obtenerObjeto(int t, int s);
+	void agregarObjeto(ObjetoJuego* obj);
+
 
 	void dibujar();
 	void actualizar(int tiempo);

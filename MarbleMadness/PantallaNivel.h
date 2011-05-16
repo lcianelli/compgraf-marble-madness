@@ -13,14 +13,13 @@
 #include "EstadoVisual.h"
 #include "Nivel.h"
 
-
 class PantallaNivel : public EstadoVisual
 {
 protected:
 	Nivel* nivelActual;
 	int idNivel;
 	void dibujar();
-	void actualizar();
+	void actualizar(int tiempo);
 	void procesarEventos();
 	void handleKeyDown(SDL_keysym* keysym);
 	void handleKeyUp(SDL_keysym* keysym);

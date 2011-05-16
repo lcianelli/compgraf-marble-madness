@@ -7,9 +7,11 @@ EstadoVisual::~EstadoVisual(void)
 
 void EstadoVisual::correr() {
 	while (loop) {
+		this->ticksIni = SDL_GetTicks();
 		procesarEventos();
+		actualizar(this->ticksIni-this->ticksFin);
 		dibujar();
-		actualizar();
+		this->ticksFin = this->ticksIni;
 	}
 }
 

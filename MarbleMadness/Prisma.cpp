@@ -22,7 +22,7 @@ void Prisma::actualizarFisica(int tiempo) {
 	//nada...
 }
 
-void Prisma::interactuar(list<ObjetoJuego*> interactores) {
+void Prisma::interactuar(list<ObjetoJuego*>* interactores) {
 
 }
 
@@ -45,3 +45,4 @@ float* Prisma::getNormalInteraccion(ObjetoJuego* obj) {
 	normalizar(normal, 3);
 	return normal;	
 }
+

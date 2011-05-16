@@ -29,6 +29,11 @@ public:
 	void pausar();
 	void terminar();
 	void dibujar();
+	void actualizar(int tiempo);
+
+	void teclaPresionada(SDL_keysym* keysym);
+	void teclaLiberada(SDL_keysym* keysym);
+
 
 	~Nivel(void);
 };
