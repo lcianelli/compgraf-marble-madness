@@ -15,7 +15,7 @@ void Personaje::moverArriba() {
 	
 	detenerAbajo();
 	this->acelerar = !(this->modVelocidad >= BOLA_VEL_MAX);
-	this->fuerza[2] = -1.f;
+	this->fuerza[2] =  -Ambiente::modFuerzaExterna;
 	normalizar(this->fuerza, 3);
 }
 
