@@ -1,6 +1,6 @@
 #include "Ambiente.h"
 float* Ambiente::gravedad = new float[3];
-float Ambiente::modFuerzaExterna = 1.f;
+float Ambiente::modFuerzaExterna = 0.00010f;
 bool Ambiente::aplicarG = false;
 
 void Ambiente::init() {

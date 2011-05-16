@@ -56,21 +56,13 @@ void Bola::dibujar() {
 void Bola::actualizar(int tiempo) {
 	
 
-	if (acelerar) {
-		this->centro[0] += (this->direccion[0]*this->modfuerza/this->masa)*tiempo*tiempo;
-		this->centro[1] += (this->direccion[1]*this->modfuerza/this->masa)*tiempo*tiempo;
-		this->centro[2] += (this->direccion[2]*this->modfuerza/this->masa)*tiempo*tiempo;
-	} else {
-		this->centro[0] += this->direccion[0]*this->modVelocidad*tiempo;
-		this->centro[1] += this->direccion[1]*this->modVelocidad*tiempo;
-		this->centro[2] += this->direccion[2]*this->modVelocidad*tiempo;
-	}
+	this->centro[0] = this->direccion[0];
+	this->centro[1] = this->direccion[1];
+	this->centro[2] = this->direccion[2];
 	
-	//cout << "centro " << centro[0] << "," << centro[1] << "," << centro[2] << endl;
-	
-	this->rotacion[0] = this->direccion[0]*this->modVelocidad*tiempo;
-	this->rotacion[1] = this->direccion[1]*this->modVelocidad*tiempo;
-	this->rotacion[2] = this->direccion[2]*this->modVelocidad*tiempo;
+	this->rotacion[0] = this->velocidad[0]*tiempo;//girará tan rápido como se mueva linealmente, no es muy realista, pero pasa :)
+	this->rotacion[1] = this->velocidad[1]*tiempo;
+	this->rotacion[2] = this->velocidad[2]*tiempo;
 
 }
 
@@ -83,11 +75,12 @@ void Bola::actualizarFisica(int tiempo) {
 	for (int i = 0; i < 3; i++) {
 		aceleracion[i] = this->fuerza[i] * this->masa * this->modfuerza;
 		
-		direccion[i] += aceleracion[i]*tiempo/10.f;		
+		direccion[i] += (aceleracion[i]*tiempo*tiempo)/2.f + velocidad[i]*tiempo;
+		velocidad[i] += aceleracion[i]*tiempo;
+		
 	}
-	
-	modVelocidad = modulo(direccion, 3);
-	normalizar(direccion, 3);
+	modVelocidad = modulo(velocidad, 3);
+	//normalizar(direccion, 3);
 	delete [] aceleracion;
 }
 
