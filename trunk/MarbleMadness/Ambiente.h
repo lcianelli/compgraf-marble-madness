@@ -5,17 +5,17 @@ public:
 	/*
 		Vector representando la gravedad, con su respectivo modulo asociado a sus componentes
 	*/
-	float *gravedad[3];
+	static float *gravedad;
 
-	/*
-		Vector unitario que representa la fuerza aplicada cuando el jugador presiona una tecla. 
-	*/
-	float *fuerzaExterna[3];
+	static bool aplicarG;
 	/*
 		Modulo de dicha fuerza
 	*/
-	float modFuerzaExterna;
+	static float modFuerzaExterna;
 
+	static void init();
+
+	static void aplicarGravedad(bool aplicar);
 	Ambiente(void);
 	~Ambiente(void);
 };

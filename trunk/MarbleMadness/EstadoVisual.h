@@ -2,6 +2,7 @@
 #ifndef ESTADO_VISUAL_H
 #define ESTADO_VISUAL_H
 
+#include <SDL.h>
 
 class EstadoVisual {
 public:
@@ -10,10 +11,11 @@ public:
 	static const int FPS_60 = 60;
 
 protected:
+	Uint32 ticksIni, ticksFin;
 	int refreshFreq;
 	bool loop;
 	virtual void dibujar() = 0;
-	virtual void actualizar() = 0;
+	virtual void actualizar(int tiempo) = 0;
 	virtual void procesarEventos() = 0;
 	
 	

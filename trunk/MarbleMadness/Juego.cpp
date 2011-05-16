@@ -88,6 +88,6 @@ void setupOpengl(int width, int height) {
 }
 
 void Juego::avanzarNivel(){
-	this->estadoActual->cambiarNivel();
+	//this->estadoActual->cambiarNivel();
 }
 

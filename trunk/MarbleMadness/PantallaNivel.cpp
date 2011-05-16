@@ -1,8 +1,5 @@
 #include "PantallaNivel.h"
 
-
-Uint32 ticksIni = 0, ticksFin = 0;
-
 GLfloat xspeed = 0, zspeed= 0;
 const GLfloat XSPEED = 0.01f;
 const GLfloat ZSPEED = 0.01f;
@@ -21,16 +18,16 @@ GLfloat Y_MAX = 1.f;
 GLfloat  A = -6.f/((T_SALTO+T_SALTO/2)*(T_SALTO/2));
 GLfloat B = -A*T_SALTO;
 
-void updateAlpha() {	
+/*void updateAlpha() {	
 	alphaz += (ticksIni - ticksFin) * xspeed * 20;
 	alphax += (ticksIni - ticksFin) * zspeed * 100;
-}
+}*/
 
 
 PantallaNivel::PantallaNivel(void)
 {
-
-
+	this->ticksIni = 0;
+	this->ticksFin = 0;
 }
 
 
@@ -64,8 +61,8 @@ void PantallaNivel::dibujar() {
 	glVertex3f(-2.f, 2.f, yaux);
 	glEnd();
 
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+	this->nivelActual->dibujar();
+	/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
 	glPushMatrix();
 		glTranslatef(xpos,ypos,zpos);
@@ -82,13 +79,19 @@ void PantallaNivel::dibujar() {
 	glPopMatrix();
 
 	gluDeleteQuadric(sphereQuadric);
+	*/
 	glFlush();
 	SDL_GL_SwapBuffers();
 
 }
 
-void PantallaNivel::actualizar() {
-	Uint32 tiempoTranscurrido = ticksIni - ticksFin;
+void PantallaNivel::actualizar(int tiempo) {
+	if (this->nivelActual != NULL) {
+		
+		this->nivelActual->actualizar(tiempo);
+	}
+
+	/*Uint32 tiempoTranscurrido = ticksIni - ticksFin;
 	
 	xpos += (ticksIni - ticksFin)*xspeed;
 	zpos += (ticksIni - ticksFin)*zspeed;
@@ -101,7 +104,7 @@ void PantallaNivel::actualizar() {
 			saltar = false;
 		}
 	}
-	ticksFin = ticksIni;
+	ticksFin = ticksIni;*/
 }
 
 void PantallaNivel::procesarEventos() {
@@ -111,9 +114,11 @@ void PantallaNivel::procesarEventos() {
 		switch (ev.type) {
 			case SDL_KEYDOWN:
 				handleKeyDown(&ev.key.keysym);
+				this->nivelActual->teclaPresionada(&ev.key.keysym);
 				break;
 			case SDL_KEYUP:
 				handleKeyUp(&ev.key.keysym);
+				this->nivelActual->teclaLiberada(&ev.key.keysym);
 				break;
 			case SDL_QUIT:
 				this->detener();
@@ -124,13 +129,19 @@ void PantallaNivel::procesarEventos() {
 }
 
 void PantallaNivel::inicializar() {
-	this->loop = true;
 	this->idNivel=1;
 	this->nivelActual=new Nivel(this->idNivel);
+	this->nivelActual->iniciar();
+	this->ticksIni = SDL_GetTicks();
+	this->ticksFin = this->ticksIni;
+	this->loop = true;
 }
 
 void PantallaNivel::handleKeyDown(SDL_keysym* keysym) {
 	switch (keysym->sym) {
+	case SDLK_g:
+		Ambiente::aplicarGravedad(!Ambiente::aplicarG);
+		break;
 		case SDLK_ESCAPE:
 			this->detener();
 			delete Juego::inst();

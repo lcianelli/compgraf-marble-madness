@@ -8,8 +8,11 @@ ObjetoJuego::~ObjetoJuego(void)
 void ObjetoJuego::normalizar(float* vector, int largov) {
 	
 	float norm = modulo(vector, largov);
-	for (int i = 0; i < largov; i++) {
-		vector[i] = vector[i]/norm;
+	if (norm != 0) {
+
+		for (int i = 0; i < largov; i++) {
+			vector[i] = vector[i]/norm;
+		}
 	}
 
 }

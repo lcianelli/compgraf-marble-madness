@@ -9,12 +9,18 @@ class ObjetoDinamico :
 	public ObjetoJuego
 {
 protected:
-	ObjetoEstatico* piso;
+	
 	
 	
 public:	
+	ObjetoEstatico* piso;
 	bool actualizado;
 	bool esEstatico();
+
+	/**
+		Retorna el vector unitario de direccion y sentido de la fuerza que aplica este objeto sobre "obj"; el modulo real de la fuerza se retorna en "modulo"
+	*/
+	virtual float* getFuerzaAplicada(ObjetoJuego* obj, float &modulo) = 0;
 
 	virtual ObjetoEstatico* dondeEstoy() = 0;
 	virtual ~ObjetoDinamico(void);
