@@ -14,7 +14,8 @@ private:
 	enum estadoJuego {ganado,jugando,perdido,no_iniciado};
 	enum estadoJuego estado;
 	int numero;
-	int puntaje;		
+	int puntaje;
+	list<ObjetoDinamico*> objsDinamicos;
 	
 	Escenario* escenario;
 	Personaje* personaje;
@@ -25,6 +26,11 @@ private:
 public:
 	Nivel(int num);
 	void cargar(char* archivoNivel);
+	void crearObjetoDinamico(float x, float y, float z, TipoObjeto tipo);
+	void agregarObjetoDinamico(ObjetoJuego* obj);
+	void dibujarObjDinamicos();
+	void actualizarObjDinamicos(int tiempo);
+	void actualizarFisica(int tiempo);
 	void iniciar();
 	void pausar();
 	void terminar();

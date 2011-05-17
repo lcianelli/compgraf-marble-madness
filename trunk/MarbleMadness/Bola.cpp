@@ -133,10 +133,14 @@ float* Bola::getNormalInteraccion(ObjetoJuego* obj) {
 	return 0;
 }
 
+void Bola::setPiso(ObjetoEstatico* obj){
+	this->piso=obj;
+}
+
 ObjetoEstatico* Bola::dondeEstoy() {
 
 	//TODO: obtener la posicion donde estoy en la grilla
 
-	return 0;
+	return this->piso;
 }
 
