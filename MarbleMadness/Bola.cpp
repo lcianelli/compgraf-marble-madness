@@ -37,6 +37,9 @@ Bola::~Bola(void)
 }
 
 void Bola::dibujar() {
+
+
+	// cambio isa 16/5/2011
 	glPushMatrix();
 		glTranslatef(centro[0], centro[1], centro[2]);
 
@@ -48,7 +51,8 @@ void Bola::dibujar() {
 
 		gluSphere(sphereQuadric, this->r, 50, 50);
 	
-	glPopMatrix();
+	// cambio isa 16/5/2011
+		glPopMatrix();
 
 	gluDeleteQuadric(sphereQuadric);
 }

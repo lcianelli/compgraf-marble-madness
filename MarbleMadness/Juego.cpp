@@ -62,6 +62,9 @@ void Juego::iniciar() {
 	//Como juego es estatico no preciso pasarlo al constructor.
 	this->estadoActual = new PantallaNivel();
 	this->estadoActual->inicializar();
+
+	printf("Voy a correr\n");
+
 	this->estadoActual->correr();
 }
 

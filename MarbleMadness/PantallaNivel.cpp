@@ -1,4 +1,5 @@
 #include "PantallaNivel.h"
+#include "Camara.h"
 
 GLfloat xspeed = 0, zspeed= 0;
 const GLfloat XSPEED = 0.01f;
@@ -28,6 +29,7 @@ PantallaNivel::PantallaNivel(void)
 {
 	this->ticksIni = 0;
 	this->ticksFin = 0;
+	this->loop= true;
 }
 
 
@@ -41,14 +43,15 @@ void PantallaNivel::dibujar() {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	
-	glLoadIdentity();
+	//glLoadIdentity();
 	
 	glEnable(GL_DEPTH_TEST);
 	
-	glTranslatef(0.f,0.f, -10.f);
+	// cambio isa 16/5/2011
+	//glTranslatef(0.f,0.f, -10.f);
 	
 	//Ponemos la camara con la pelotita.
-	gluLookAt(xpos, 0.5f , zpos + 1.f, xpos, 0.f, zpos, 0.f, 1.f, 0.f); 
+	//gluLookAt(xpos, 0.5f , zpos + 1.f, xpos, 0.f, zpos, 0.f, 1.f, 0.f); 
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_QUADS);
@@ -108,18 +111,36 @@ void PantallaNivel::actualizar(int tiempo) {
 }
 
 void PantallaNivel::procesarEventos() {
+
+	//printf("Estoy procesando eventos\n");
+
+
 	ticksIni =  SDL_GetTicks();
 	SDL_Event ev;
 	while (SDL_PollEvent(&ev)) {
 		switch (ev.type) {
 			case SDL_KEYDOWN:
+	printf("Estoy SDL_KEYDOWN\n");
 				handleKeyDown(&ev.key.keysym);
 				this->nivelActual->teclaPresionada(&ev.key.keysym);
 				break;
 			case SDL_KEYUP:
+	printf("Estoy SDL_KEYUP\n");
 				handleKeyUp(&ev.key.keysym);
 				this->nivelActual->teclaLiberada(&ev.key.keysym);
 				break;
+			case SDL_MOUSEBUTTONDOWN:
+	printf("Estoy SDL_MOUSEBUTTONDOWN\n");
+				Camara::inst()->manejadorComienzoMovimientoCamara(&ev.button);
+				break;
+			case SDL_MOUSEMOTION:
+	printf("Estoy SDL_MOUSEMOTION\n");
+				Camara::inst()->manejadorMovimientoCamara(&ev.motion);
+				break;
+			case SDL_MOUSEBUTTONUP:
+	printf("Estoy SDL_MOUSEBUTTONUP\n");
+				Camara::inst()->manejadorFinMovimientoCamara(&ev.button);
+				break;			
 			case SDL_QUIT:
 				this->detener();
 				delete Juego::inst();

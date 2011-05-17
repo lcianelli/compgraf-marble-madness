@@ -8,6 +8,10 @@
 int main(int argc, char* argv[])
 {
 	Juego::inst()->inicializar(1280,800);
+
+		printf("Estoy iniciando\n");
+
+
 	Juego::inst()->iniciar();
 
 
