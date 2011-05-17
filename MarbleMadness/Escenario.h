@@ -21,7 +21,7 @@ using namespace std;
 class Escenario
 {
 private:
-	list<ObjetoDinamico*> objsDinamicos;
+	
 	list<ObjetoEstatico*> objsEstaticos;
 	ObjetoJuego* grilla [MATRIZ_SUELO_W][MATRIZ_SUELO_H];	
 
@@ -36,7 +36,7 @@ public:
 
 	void dibujar();
 	void actualizar(int tiempo);
-	void actualizarFisica(int tiempo);
+
 
 	~Escenario(void);
 };

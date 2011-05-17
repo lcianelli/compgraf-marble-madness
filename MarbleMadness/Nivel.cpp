@@ -37,6 +37,8 @@ void Nivel::iniciar() {
 void Nivel::dibujar() {
 	//dibujo el escenario
 
+	dibujarObjDinamicos();
+
 	this->escenario->dibujar();
 
 	//TODO: Dibujar HUD
@@ -52,7 +54,9 @@ void Nivel::actualizar(int tiempo) {
 
 	//actualizo la escena de juego
 	
-	this->escenario->actualizarFisica(tiempo);
+	actualizarFisica(tiempo);
+
+	actualizarObjDinamicos(tiempo);
 	
 	this->escenario->actualizar(tiempo);
 }
@@ -91,4 +95,37 @@ void Nivel::teclaLiberada(SDL_keysym* keysym) {
 	}
 }
 
+void Nivel::agregarObjetoDinamico(ObjetoJuego* obj){
+	if (!obj->esEstatico())  {
+		this->objsDinamicos.push_back(dynamic_cast<ObjetoDinamico*>(obj));
+	}
+}
+
+
+void Nivel::dibujarObjDinamicos(){
+	list<ObjetoDinamico*>::iterator itDin;
+	for (itDin = this->objsDinamicos.begin(); itDin != this->objsDinamicos.end(); itDin++) {
+		(*itDin)->dibujar();
+	}
+}
+
+void Nivel::actualizarObjDinamicos(int tiempo){
+	list<ObjetoDinamico*>::iterator itDin;
+	for (itDin = this->objsDinamicos.begin(); itDin != this->objsDinamicos.end(); itDin++) {
+		(*itDin)->actualizar(tiempo);
+	}
+}
+
+void Nivel::actualizarFisica(int tiempo) {
+	list<ObjetoDinamico*>::iterator it;
+	for (it = objsDinamicos.begin(); it != objsDinamicos.end(); it++) {
+		(*it)->actualizado = false;
+	}
+	for (it = objsDinamicos.begin(); it != objsDinamicos.end(); it++) {
+		if (!(*it)->actualizado) {
+			(*it)->actualizarFisica(tiempo);
+		}
+	}
+
+}
 

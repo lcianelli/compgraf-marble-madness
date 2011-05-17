@@ -39,6 +39,7 @@ public:
 	void setCentro(float cx, float cy, float cz);
 	void setRotacion(float ax, float ay, float az);
 	ObjetoEstatico* dondeEstoy();
+	void setPiso(ObjetoEstatico* obj);
 	Bola(void);
 	~Bola(void);
 };
