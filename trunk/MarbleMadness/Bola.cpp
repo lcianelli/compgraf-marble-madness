@@ -44,7 +44,7 @@ void Bola::dibujar() {
 		glTranslatef(centro[0], centro[1], centro[2]);
 
 
-//		gluSphere(sphereQuadric, this->r, 50, 50);
+		//gluSphere(sphereQuadric, this->r, 50, 50);
 	
 	// cambio isa 16/5/2011
 		glPopMatrix();
@@ -73,10 +73,10 @@ void Bola::actualizar(int tiempo) {
 			float distanciaChoque;
 			Vector normalChoque;
 			Vector puntoChoque;
-			ObjetoJuego* objChoque = calcularColision(rMov, distanciaChoque, normalChoque, puntoChoque);			
+			ObjetoJuego* objChoque = calcularProximaInteraccion(rMov, distanciaChoque, normalChoque, puntoChoque);			
 			
 			if (objChoque != NULL && distanciaChoque >= CERO ) {
-				if (acelerar && fabs(modAceleracion ) != CERO) {
+				if (acelerar && fabs(modAceleracion ) >= CERO) {
 					tiempoTranscurrido = (-modVelocidad + sqrtf(sqr(modVelocidad) + 2.f*modAceleracion*(distanciaChoque))) / modAceleracion;
 				} else {
 					tiempoTranscurrido = distanciaChoque / modVelocidad;	
@@ -85,7 +85,7 @@ void Bola::actualizar(int tiempo) {
 			
 			if (tiempoTranscurrido <= dT) {
 				actualizarMovimiento(tiempoTranscurrido);
-				procesarColision(objChoque, tiempoTranscurrido, distanciaChoque, normalChoque, puntoChoque);
+				procesarInteraccion(objChoque, tiempoTranscurrido, distanciaChoque, normalChoque, puntoChoque);
 			} else {				
 				actualizarMovimiento(dT);
 			}
@@ -199,8 +199,10 @@ void Bola::actualizarMovimiento(int tiempo) {
 	
 }
 
-ObjetoJuego* Bola::calcularColision(const Rayo &rMovimiento, float distanciaChoque, Vector &normalChoque, Vector &puntoChoque) {
+ObjetoJuego* Bola::calcularColision(const Rayo &rMovimiento, float &distanciaChoque, Vector &normalChoque, Vector &puntoChoque) {
 	//TODO: implementar!!!!
+	
+
 	return NULL;
 }	
 

@@ -15,6 +15,7 @@
 #include "Rayo.h"
 #include "Rectangulo.h"
 #include "Plano.h"
+#include "Nivel.h"
 
 
 
@@ -37,22 +38,23 @@ protected:
 	//actualiza parámetros de velocidad y posicion segun el tiempo transcurrido y las caracteristicas del movimiento (acerleracion, velocidad y posiciones previas)
 	virtual void actualizarMovimiento(int tiempo);
 
-	//calcula la colision con el objeto mas cercano, colision que puede ser pasar a estado de caida libre, 
-	//o simplemente pasar a la seccion de piso de al lado en la grilla
-	virtual ObjetoJuego* calcularColision(const Rayo &rMovimiento, float distanciaChoque, Vector &normalChoque, Vector &puntoChoque);
+	//Devuelve el objeto más cercano con el que la bola va a interactuar. 
+	//Retorna nulo si no sale del lugar actual en la grilla ni se choca con ningun movil	
+	virtual ObjetoJuego* calcularProximaInteraccion(const Rayo &rMovimiento, float &distanciaChoque, Vector &normalChoque, Vector &puntoChoque);
 
 
 	//Calcula las fuerzas resultantes del choque de la bola con el objeto objChoque, en el punto puntoChoque, dado el vector normal a la superficie de objChoque
 	//puede que alguno de los parametros no sea necesario.. veremos.
-	virtual void procesarColision(ObjetoJuego* objChoque, float tiempoTranscurrido, float distanciaChoque, Vector &normalChoque, Vector& puntoChoque);
+	virtual void procesarInteraccion(ObjetoJuego* objChoque, float tiempoTranscurrido, float distanciaChoque, Vector &normalChoque, Vector& puntoChoque);
 
 public:
 
-	
-
+	Nivel* nivel;
 	float r;
 	float* centro;
 	float* rotacion;
+
+
 	void dibujar();
 	void actualizar(int tiempo);//tiempo = tiempo transcurrido desde ultimo update
 
