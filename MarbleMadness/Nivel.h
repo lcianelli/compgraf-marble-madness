@@ -38,10 +38,12 @@ public:
 	void terminar();
 	void dibujar();
 	void actualizar(int tiempo);
-
+	
 	void teclaPresionada(SDL_keysym* keysym);
 	void teclaLiberada(SDL_keysym* keysym);
-
+	
+	void dondeEstoy(float x, float x, int &t, int &s);
+	ObjetoJuego* obtenerObjeto(int t, int s);
 
 	~Nivel(void);
 };

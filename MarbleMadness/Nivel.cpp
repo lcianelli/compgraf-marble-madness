@@ -248,3 +248,17 @@ void Nivel::actualizarFisica(int tiempo) {
 
 }
 
+void Nivel::dondeEstoy(float x, float z, int &t, int &s) {
+	if (escenario != NULL && x < MATRIZ_DIMENSION*ANCHO_CELDA_GRILLA && z < MATRIZ_DIMENSION*ANCHO_CELDA_GRILLA) {
+		escenario->dondeEstoy(x, z, t, s);	
+	} else {
+		t = s = MATRIZ_DIMENSION+1;
+	}
+}
+
+ObjetoJuego* Nivel::obtenerObjeto(int t, int s) {
+	if (escenario != NULL && t < MATRIZ_DIMENSION && s < MATRIZ_DIMENSION){
+		return escenario->obtenerObjeto(t, s);		
+	}
+	return NULL;
+}
