@@ -86,7 +86,7 @@ void setupOpengl(int width, int height) {
 	glLoadIdentity();
 	gluPerspective( 45.0, ratio, 0.1f, -100.0f );
 	
-	
+	Configuracion::inst()->inicializar();
 	
 }
 
