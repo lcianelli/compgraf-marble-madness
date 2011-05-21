@@ -5,7 +5,6 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 
-using namespace std;
 
 class Configuracion
 {

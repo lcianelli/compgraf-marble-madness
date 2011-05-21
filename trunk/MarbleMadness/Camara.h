@@ -14,9 +14,6 @@ private:
 	GLfloat xMouse;
 	GLfloat yMouse;
 	GLboolean bottonDerDown;
-	GLfloat* puntoVista;
-	GLfloat* posicionCamara;
-	GLfloat* vectorCamara;
 	Camara(void);
 public:
 
@@ -26,19 +23,6 @@ public:
 		}
 		return instancia;
 	}
-
-
-	GLfloat* getpuntoVista();
-
-	void setpuntoVista(GLfloat* nuevoPtoVista);
-
-	GLfloat* getposicionCamara();
-
-	void setposicionCamara(GLfloat* nuevaPosicion);
-
-	GLfloat* getvectorCamara();
-
-	void setvectorCamara(GLfloat* nuevoVector);
 
 	GLfloat getXMouse();
 
@@ -53,8 +37,6 @@ public:
 	void manejadorMovimientoCamara(SDL_MouseMotionEvent* mouse);
 
 	void manejadorFinMovimientoCamara(SDL_MouseButtonEvent* mouse);
-
-	void setVista(GLfloat* pos, GLfloat* pto, GLfloat* vect);
 
 	~Camara(void);
 };

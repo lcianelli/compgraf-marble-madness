@@ -17,10 +17,10 @@ void Configuracion::inicializar()
 
 	for(int i=0; i<5; i++){
 		for(int j=0; j<4;j++){
-			instancia->direccionesLuz[i][j]=0.0;
-			instancia->lucesAmbiente[i][j]=1.0;
-			instancia->lucesDifusas[i][j]=1.0;
-			instancia->lucesEspeculares[i][j]=1.0;
+			instancia->direccionesLuz[i][j]=0.0f;
+			instancia->lucesAmbiente[i][j]=1.0f;
+			instancia->lucesDifusas[i][j]=1.0f;
+			instancia->lucesEspeculares[i][j]=1.0f;
 		}
 	}
 
@@ -28,8 +28,8 @@ void Configuracion::inicializar()
 	instancia->texturas=true;
 	instancia->wireframe=false;
 	instancia->interpolado=true;
-	instancia->velocidad=1.0;
-	instancia->direccionesLuz[0][2]=1.0;
+	instancia->velocidad=1.0f;
+	instancia->direccionesLuz[0][2]=1.0f;
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, instancia->lucesAmbiente[0]);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, instancia->lucesDifusas[0]);
@@ -82,41 +82,41 @@ bool Configuracion::getTexturas()
 
 void Configuracion::aumentarR(int id)
 {
-	if(instancia->lucesDifusas[id][0]!=1.0)
-		instancia->lucesDifusas[id][0]+=0.1;
+	if(instancia->lucesDifusas[id][0]!=1.0f)
+		instancia->lucesDifusas[id][0]+=0.1f;
 }
 
 void Configuracion::aumentarG(int id)
 {
-	if(instancia->lucesDifusas[id][1]!=1.0)
-		instancia->lucesDifusas[id][1]+=0.1;
+	if(instancia->lucesDifusas[id][1]!=1.0f)
+		instancia->lucesDifusas[id][1]+=0.1f;
 }
 
 void Configuracion::aumentarB(int id)
 {
-	if(instancia->lucesDifusas[id][2]!=1.0)
-		instancia->lucesDifusas[id][2]+=0.1;
+	if(instancia->lucesDifusas[id][2]!=1.0f)
+		instancia->lucesDifusas[id][2]+=0.1f;
 }
 
 
 
 void Configuracion::disminuirR(int id)
 {
-	if(instancia->lucesDifusas[id][0]!=0.0)
-		instancia->lucesDifusas[id][0]-=0.1;
+	if(instancia->lucesDifusas[id][0]!=0.0f)
+		instancia->lucesDifusas[id][0]-=0.1f;
 }
 
 
 void Configuracion::disminuirG(int id)
 {
-	if(instancia->lucesDifusas[id][1]!=0.0)
-		instancia->lucesDifusas[id][1]-=0.1;
+	if(instancia->lucesDifusas[id][1]!=0.0f)
+		instancia->lucesDifusas[id][1]-=0.1f;
 }
 
 void Configuracion::disminuirB(int id)
 {
-	if(instancia->lucesDifusas[id][2]!=0.0)
-		instancia->lucesDifusas[id][2]-=0.1;
+	if(instancia->lucesDifusas[id][2]!=0.0f)
+		instancia->lucesDifusas[id][2]-=0.1f;
 }
 
 
