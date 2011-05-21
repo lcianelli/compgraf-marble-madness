@@ -39,22 +39,22 @@ Bola::~Bola(void)
 void Bola::dibujar() {
 
 
-	// cambio isa 16/5/2011
-	glPushMatrix();
-		glTranslatef(centro[0], centro[1], centro[2]);
+	//// cambio isa 16/5/2011
+	//glPushMatrix();
+	//	glTranslatef(centro[0], centro[1], centro[2]);
 
-		glRotatef(rotacion[0],1.f,0.f,0.f);
-		glRotatef(rotacion[2],0.f,0.f,1.0);
-		glColor3ub(255, 0, 0);
-	
-		GLUquadric* sphereQuadric = gluNewQuadric();
+	//	glRotatef(rotacion[0],1.f,0.f,0.f);
+	//	glRotatef(rotacion[2],0.f,0.f,1.0);
+	//	glColor3ub(255, 0, 0);
+	//
+	//	GLUquadric* sphereQuadric = gluNewQuadric();
 
-		gluSphere(sphereQuadric, this->r, 50, 50);
-	
-	// cambio isa 16/5/2011
-		glPopMatrix();
+	//	gluSphere(sphereQuadric, this->r, 50, 50);
+	//
+	//// cambio isa 16/5/2011
+	//	glPopMatrix();
 
-	gluDeleteQuadric(sphereQuadric);
+	//gluDeleteQuadric(sphereQuadric);
 }
 
 void Bola::actualizar(int tiempo) {

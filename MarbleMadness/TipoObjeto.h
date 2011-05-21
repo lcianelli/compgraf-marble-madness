@@ -6,7 +6,7 @@
 
 
 typedef enum TipoObjeto {
-	PRISMA = 0, BOLA	
+	PRISMA = 0, BOLA, RAMPA	
 };
 
 

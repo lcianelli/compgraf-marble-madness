@@ -11,7 +11,7 @@ EstadoVisual::~EstadoVisual(void)
 }
 
 void EstadoVisual::correr() {
-	glTranslatef(0.f,0.f, -10.f);
+	//glTranslatef(0.f,0.f, 15.f);
 	while (loop) {
 			//printf("voy a procesar eventos\n");
 			this->ticksIni = SDL_GetTicks();
