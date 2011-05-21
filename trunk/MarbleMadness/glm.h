@@ -268,3 +268,7 @@ glmWeld(GLMmodel* model, GLfloat epsilon);
  *
  */
 GLuint glmLoadTexture(char* pathTexture);
+
+
+GLvoid
+glmTransformar(GLMmodel* model, GLfloat altura);
