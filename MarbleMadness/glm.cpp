@@ -18,9 +18,6 @@
 #include <string.h>
 #include <assert.h>
 #include "glm.h"
-#include <Map>
-
-using namespace std;
 
 
 #define T(x) (model->triangles[(x)])
@@ -897,48 +894,6 @@ glmScale(GLMmodel* model, GLfloat scale)
     model->vertices[3 * i + 2] *= scale;
   }
 }
-
-/**************/
-GLvoid
-glmTransformar(GLMmodel* model, GLfloat altura)
-{
-  GLuint i;
-
-  map<int,GLfloat> verticesMover; 
-
-  for (i = 0; i < model->numtriangles; i++) {
-	  GLfloat* norm = new GLfloat[3];
-	  norm[0]= 0.0;
-	  norm[1]= -1.0;
-	  norm[2]= 0.0;
-	  GLint indiceNormal0 = model->triangles[i].nindices[0];
-	  GLint indiceNormal1 = model->triangles[i].nindices[1];
-	  GLint indiceNormal2 = model->triangles[i].nindices[2];
-
-	  if((model->normals[3*indiceNormal0+0] == norm[0])&&(model->normals[3*indiceNormal0+1] == norm[1])&&(model->normals[3*indiceNormal0+2] == norm[2])
-		  &&(model->normals[3*indiceNormal1+0] == norm[0])&&(model->normals[3*indiceNormal1+1] == norm[1])&&(model->normals[3*indiceNormal1+2] == norm[2])
-		  &&(model->normals[3*indiceNormal2+0] == norm[0])&&(model->normals[3*indiceNormal2+1] == norm[1])&&(model->normals[3*indiceNormal2+2] == norm[2]))
-	  {
-		GLint indiceVerticeMover0 = model->triangles[i].vindices[0];
-		GLint indiceVerticeMover1 = model->triangles[i].vindices[1];
-		GLint indiceVerticeMover2 = model->triangles[i].vindices[2];
-
-		verticesMover.insert(pair<int,GLfloat>(indiceVerticeMover0,1));
-		verticesMover.insert(pair<int,GLfloat>(indiceVerticeMover1,1));
-		verticesMover.insert(pair<int,GLfloat>(indiceVerticeMover2,1));
-
-	  }
-
-  }
-	for ( map<int,GLfloat>::iterator it=verticesMover.begin() ; it != verticesMover.end(); it++ ){
-		int indice = it->first;
-		model->vertices[3 * indice + 1] -= altura;
-	}
-
-}
-
-/**************/
-
 
 /* glmReverseWinding: Reverse the polygon winding for all polygons in
  * this model.  Default winding is counter-clockwise.  Also changes

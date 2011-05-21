@@ -27,9 +27,9 @@ void Bola::setCentro(float cx, float cy, float cz) {
 }
 
 void Bola::setRotacion(float ax, float ay, float az) {
-	centro[0] = ax;
-	centro[1] = ay;
-	centro[2] = az;
+	rotacion[0] = ax;
+	rotacion[1] = ay;
+	rotacion[2] = az;
 }
 
 Bola::~Bola(void)
@@ -39,9 +39,15 @@ Bola::~Bola(void)
 void Bola::dibujar() {
 
 
-	//// cambio isa 16/5/2011
-	//glPushMatrix();
-	//	glTranslatef(centro[0], centro[1], centro[2]);
+	// cambio isa 16/5/2011
+	glPushMatrix();
+		glTranslatef(centro[0], centro[1], centro[2]);
+
+
+		gluSphere(sphereQuadric, this->r, 50, 50);
+	
+	// cambio isa 16/5/2011
+		glPopMatrix();
 
 	//	glRotatef(rotacion[0],1.f,0.f,0.f);
 	//	glRotatef(rotacion[2],0.f,0.f,1.0);
@@ -58,21 +64,43 @@ void Bola::dibujar() {
 }
 
 void Bola::actualizar(int tiempo) {
-	
+	if (!this->actualizado) {
+		int dT = tiempo;
+		int tiempoTranscurrido;
+		while (dT > 0) {
+			tiempoTranscurrido = dT; //me dirá el tiempo transcurrido hasta el momento en que ocurra un choque. Inicializamos en dT por si no ocurre
+			Rayo rMov(Vector(this->centro), Vector(this->direccion).unitario());
+			float distanciaChoque;
+			Vector normalChoque;
+			Vector puntoChoque;
+			ObjetoJuego* objChoque = calcularColision(rMov, distanciaChoque, normalChoque, puntoChoque);			
+			
+			if (objChoque != NULL && distanciaChoque >= CERO ) {
+				if (acelerar && fabs(modAceleracion ) != CERO) {
+					tiempoTranscurrido = (-modVelocidad + sqrtf(sqr(modVelocidad) + 2.f*modAceleracion*(distanciaChoque))) / modAceleracion;
+				} else {
+					tiempoTranscurrido = distanciaChoque / modVelocidad;	
+				}				
+			} 
+			
+			if (tiempoTranscurrido <= dT) {
+				actualizarMovimiento(tiempoTranscurrido);
+				procesarColision(objChoque, tiempoTranscurrido, distanciaChoque, normalChoque, puntoChoque);
+			} else {				
+				actualizarMovimiento(dT);
+			}
+		
+			dT -= tiempoTranscurrido;
 
-	this->centro[0] = this->direccion[0];
-	this->centro[1] = this->direccion[1];
-	this->centro[2] = this->direccion[2];
-	
-	this->rotacion[0] = this->velocidad[0]*tiempo;//girará tan rápido como se mueva linealmente, no es muy realista, pero pasa :)
-	this->rotacion[1] = this->velocidad[1]*tiempo;
-	this->rotacion[2] = this->velocidad[2]*tiempo;
-
+		}
+		this->actualizado = true;
+	}	
 }
 
+//NO SE USA MAS
 void Bola::actualizarFisica(int tiempo) {
 	
-	list<ObjetoJuego*> l;
+	/*list<ObjetoJuego*> l;
 	interactuar(&l);
 	//ahora calculo nueva velocidad;
 	float* aceleracion = new float[3];
@@ -85,9 +113,11 @@ void Bola::actualizarFisica(int tiempo) {
 	}
 	modVelocidad = modulo(velocidad, 3);
 	//normalizar(direccion, 3);
-	delete [] aceleracion;
+	delete [] aceleracion;*/
 }
 
+
+//NO SE USA MAS
 void Bola::interactuar(list<ObjetoJuego*>* interactores) {
 	float* fuerzaTotal = new float[3];
 	float* fuerzaAplicada;
@@ -125,14 +155,17 @@ void Bola::interactuar(list<ObjetoJuego*>* interactores) {
 	delete[] fuerzaTotal;
 }
 
+//NO SE USA MAS
 float* Bola::getFuerzaAplicada(ObjetoJuego* obj, float &modulo) {
 	return 0;
 }
 
+//NO SE USA MAS
 float* Bola::getNormalInteraccion(ObjetoJuego* obj) {
 	return 0;
 }
 
+//
 void Bola::setPiso(ObjetoEstatico* obj){
 	this->piso=obj;
 }
@@ -144,3 +177,33 @@ ObjetoEstatico* Bola::dondeEstoy() {
 	return this->piso;
 }
 
+void Bola::actualizarMovimiento(int tiempo) {
+	Vector vel = Vector(this->direccion).unitario();
+	Vector aceleracion = Vector(this->fuerza).unitario()*modfuerza*masa;
+	Vector desplazamiento = Vector(aceleracion*modAceleracion*(float)tiempo*(float)tiempo*(1.f/2.f) + vel*(float)tiempo);
+	Vector pos = Vector(this->centro);
+
+	pos += desplazamiento;
+	Vector dV = (aceleracion*tiempo).unitario();
+	vel += dV;	
+	modVelocidad += (aceleracion*tiempo).norma();
+	vel = vel.unitario();
+	if (modVelocidad > BOLA_VEL_MAX) {
+		aceleracion = Vector(0.f, 0.f, 0.f);
+		modVelocidad = BOLA_VEL_MAX;
+	}
+	delete [] this->direccion;
+	delete [] this->centro;
+	this->centro = pos.floatArr();
+	direccion = vel.floatArr();
+	
+}
+
+ObjetoJuego* Bola::calcularColision(const Rayo &rMovimiento, float distanciaChoque, Vector &normalChoque, Vector &puntoChoque) {
+	//TODO: implementar!!!!
+	return NULL;
+}	
+
+void Bola::procesarColision(ObjetoJuego* objChoque, float tiempoTranscurrido, float distanciaChoque, Vector &normalChoque, Vector& puntoChoque) {
+	//TODO: implementar!!!
+}

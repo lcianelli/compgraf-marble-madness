@@ -42,8 +42,8 @@ public:
 
 	//Rectangulo(const Plano &p, const Vector& opuesto);
 
-	float W() {return _w;}
-	float H() {return _h;}
+	float W() const {return _w;}
+	float H() const {return _h;}
 	Vector P1() { return p1; }
 	Vector P2() { return p2; }
 	Vector P3() { return p3; }
