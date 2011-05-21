@@ -27,12 +27,12 @@ Nivel::Nivel(int num)
 
 	this->dimensionEscenario=2;
 
-	cargar("lala");
+	cargar("modelos/PruebaXML.xml");
 }
 
 void Nivel::cargar(char* nomArch)
 {
-    TiXmlDocument XMLdoc("C:\\Users\\Isabela\\Desktop\\PruebaXML.xml");
+    TiXmlDocument XMLdoc(nomArch);
     bool loadOkay = XMLdoc.LoadFile();
     if (loadOkay)
     {
@@ -173,39 +173,7 @@ void Nivel::teclaPresionada(SDL_keysym* keysym) {
 		case SDLK_RIGHT:
 			this->personaje->moverDerecha();
 			break;
-		case SDLK_F1:
-			Configuracion::inst()->setWireframe(!Configuracion::inst()->getWireframe());
-			break;
-		case SDLK_F2:
-			Configuracion::inst()->setInterpolado(!Configuracion::inst()->getInterpolado());
-			break;
-		case SDLK_F3:
-			Configuracion::inst()->setTexturas(!Configuracion::inst()->getTexturas());
-			break;
-		case SDLK_F4:
-			Configuracion::inst()->aumentarR(0);
-			Configuracion::inst()->setCambiarLuz(true);
-			break;
-		case SDLK_F5:
-			Configuracion::inst()->aumentarG(0);
-			Configuracion::inst()->setCambiarLuz(true);
-			break;
-		case SDLK_F6:
-			Configuracion::inst()->aumentarB(0);
-			Configuracion::inst()->setCambiarLuz(true);
-			break;
-		case SDLK_F7:
-			Configuracion::inst()->disminuirR(0);
-			Configuracion::inst()->setCambiarLuz(true);
-			break;
-		case SDLK_F8:
-			Configuracion::inst()->disminuirG(0);
-			Configuracion::inst()->setCambiarLuz(true);
-			break;
-		case SDLK_F9:
-			Configuracion::inst()->disminuirB(0);
-			Configuracion::inst()->setCambiarLuz(true);
-			break;
+		default:break;
 		case SDLK_1:
 			glTranslatef(0.0,0.0,1.0);
 			break;
@@ -242,6 +210,7 @@ void Nivel::teclaLiberada(SDL_keysym* keysym) {
 		case SDLK_RIGHT:
 			this->personaje->detenerDerecha();
 			break;
+		default:break;
 	}
 }
 

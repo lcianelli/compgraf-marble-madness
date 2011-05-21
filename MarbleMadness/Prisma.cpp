@@ -4,7 +4,7 @@
 Prisma::Prisma(void): ObjetoEstatico()
 {
 	this->objeto= new GLMmodel();
-	objeto = glmReadOBJ("C:/Users/Isabela/Desktop/objetoPrisma10.obj");
+	objeto = glmReadOBJ("modelos/objetoPrisma10.obj");
 }
 
 
