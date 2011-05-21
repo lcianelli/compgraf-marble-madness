@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef MARBLE_PRISMA_H
-#define MARBLE_PRISMA_H
+#ifndef MARBLE_Rampa_H
+#define MARBLE_Rampa_H
 
 #include "ObjetoEstatico.h"
 #include <list>
@@ -10,7 +10,7 @@
 #include <gl\GLU.h>
 
 
-class Prisma : public ObjetoEstatico
+class Rampa : public ObjetoEstatico
 {
 protected:
 	void interactuar(list<ObjetoJuego*>* interactores);
@@ -24,17 +24,20 @@ protected:
 	GLMmodel* objeto;
 
 public:
-	float l, w, h; //dimensiones del prisma, ancho, alto, y largo
+	float l, w, h; //dimensiones del Rampa, ancho, alto, y largo
 	float *a;
 	float froz;
 
-	Prisma(void);
+	Rampa(void);
 	
+
+	void setAlturaSueloRampa(int nuevaAltura);
+
 	void dibujar();
 	void actualizar(int tiempo);//tiempo = tiempo transcurrido desde ultimo update
 	void actualizarFisica(int tiempo); //tiempo = tiempo transcurrido desde ultimo update
 
-	~Prisma(void);
+	~Rampa(void);
 };
 
 #endif

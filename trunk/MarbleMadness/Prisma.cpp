@@ -1,8 +1,10 @@
 #include "Prisma.h"
 
 
-Prisma::Prisma(void)
+Prisma::Prisma(void): ObjetoEstatico()
 {
+	this->objeto= new GLMmodel();
+	objeto = glmReadOBJ("C:/Users/Isabela/Desktop/objetoPrisma10.obj");
 }
 
 
@@ -11,6 +13,25 @@ Prisma::~Prisma(void)
 }
 
 void Prisma::dibujar() {
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_COLOR_MATERIAL, objeto->materials[1].emmissive);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objeto->materials[1].diffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objeto->materials[1].specular);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, objeto->materials[1].shininess);
+
+	//GLfloat escalado = this->altura/10.0;
+	//GLfloat translado = (10.0/2)*escalado + (10.0/2)*(1-escalado);
+
+	//glScaled(1,this->altura/10.0,1);
+
+
+	//glTranslatef(0.0,translado,0.0);
+
+	glmDraw(objeto, GLM_SMOOTH);
+
+	//glTranslatef(0.0,-translado,0.0);
+
+	//glScaled(1,10.0/this->altura,1);
 
 }
 

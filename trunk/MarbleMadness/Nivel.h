@@ -19,6 +19,7 @@ private:
 	list<ObjetoDinamico*> objsDinamicos;
 	
 	Escenario* escenario;
+	int dimensionEscenario;
 	Personaje* personaje;
 	InicioEscenario* inicioNivel;
 	FinEscenario* finNivel;

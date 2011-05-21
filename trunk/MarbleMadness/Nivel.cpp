@@ -1,5 +1,10 @@
 #include "Nivel.h"
 
+#include "tinyxml.h"
+
+#include "Camara.h"
+
+
 Nivel::Nivel(int num)
 {
 	this->numero = num;
@@ -16,12 +21,64 @@ Nivel::Nivel(int num)
 	nuevo=itoa(this->numero,nuevo,10);
 	strcat(nomArch,nuevo);
 	strcat(nomArch,".xml");
-	cargar(nomArch);
+	//cargar(nomArch);
+
+//	iniciar();
+
+	this->dimensionEscenario=2;
+
+	cargar("lala");
 }
 
 void Nivel::cargar(char* nomArch)
 {
+    TiXmlDocument XMLdoc("C:\\Users\\Isabela\\Desktop\\PruebaXML.xml");
+    bool loadOkay = XMLdoc.LoadFile();
+    if (loadOkay)
+    {
+        cout << "PruebaXML.xml loaded" << endl;
+        TiXmlElement *Matriz, *Fila, *ObjetoPosicion;
+        Matriz = XMLdoc.FirstChildElement( "Matriz" );
 
+
+
+		int s = 0;
+		int t = 0;
+
+        if ( Matriz )
+        {
+            // Parse parameters
+            Fila = Matriz->FirstChildElement("Fila");
+            while ( Fila )
+            {
+				ObjetoPosicion = Fila->FirstChildElement("Objeto");
+				while ( ObjetoPosicion )
+				{
+					cout << "Parameter: tipo= '" << ObjetoPosicion->Attribute("tipo") << "', y='" << ObjetoPosicion->Attribute("altura") << "'" << endl;
+
+					const char* tipo= ObjetoPosicion->Attribute("tipo");
+					int y= atoi(ObjetoPosicion->Attribute("altura"));
+					int y2= atoi(ObjetoPosicion->Attribute("alturaSuelo"));
+					int r= atoi(ObjetoPosicion->Attribute("rotacion"));
+
+					TipoObjeto tipoObj;
+					if(strcmp(tipo,"PRISMA")==0){
+						tipoObj= PRISMA;
+					}else if (strcmp(tipo,"RAMPA")==0){
+						tipoObj= RAMPA;
+					}
+
+					this->escenario->cargarObjeto(s,t,y,tipoObj,y2,r);
+
+					ObjetoPosicion = ObjetoPosicion->NextSiblingElement( "Objeto" );
+					t++;
+				}
+				Fila = Fila->NextSiblingElement( "Fila" );
+				t= 0;
+				s++;
+			}
+		}
+}
 }
 
 Nivel::~Nivel(void)
@@ -64,8 +121,23 @@ void Nivel::dibujar() {
 
 	dibujarObjDinamicos();
 
+	GLfloat* vistaNueva = new GLfloat[3];
+	vistaNueva[0] = 0.0;//this->dimensionEscenario/2.0;
+	vistaNueva[1] = 0.0;
+	vistaNueva[2] = 0.0;//this->dimensionEscenario/2.0;
+
+	//Camara::inst()->setVista(Camara::inst()->getposicionCamara(),vistaNueva,Camara::inst()->getvectorCamara());
+
+	glTranslatef(-15.0,-30.0,55.0);
+	glPushMatrix();
+
 	this->escenario->dibujar();
 	
+
+	glPopMatrix();
+	glTranslatef(15.0,30.0,-55.0);
+
+	//glTranslatef(this->dimensionEscenario*MATRIZ_SUELO_W,0,this->dimensionEscenario*MATRIZ_SUELO_H);
 
 	//TODO: Dibujar HUD
 }
@@ -133,6 +205,24 @@ void Nivel::teclaPresionada(SDL_keysym* keysym) {
 		case SDLK_F9:
 			Configuracion::inst()->disminuirB(0);
 			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_1:
+			glTranslatef(0.0,0.0,1.0);
+			break;
+		case SDLK_2:
+			glTranslatef(0.0,0.0,-1.0);
+			break;
+		case SDLK_3:
+			glTranslatef(0.0,1.0,0.0);
+			break;
+		case SDLK_4:
+			glTranslatef(0.0,-1.0,0.0);
+			break;
+		case SDLK_5:
+			glTranslatef(1.0,0.0,0.0);
+			break;
+		case SDLK_6:
+			glTranslatef(-1.0,0.0,0.0);
 			break;
 	}
 }

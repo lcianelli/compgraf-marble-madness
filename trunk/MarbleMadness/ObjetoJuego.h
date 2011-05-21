@@ -46,6 +46,8 @@ public:
 	void normalizar(float* vector, int largov);
 	float modulo(float* vector, int largov); 
 
+	ObjetoJuego(void);
+
 	virtual ~ObjetoJuego(void);
 };
 

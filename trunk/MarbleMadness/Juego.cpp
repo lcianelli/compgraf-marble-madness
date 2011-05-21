@@ -1,4 +1,7 @@
 #include "Juego.h"
+
+#include "Camara.h"
+
 Juego* Juego::instancia = 0;
 
 void quitSDLApp(int code);
@@ -87,6 +90,11 @@ void setupOpengl(int width, int height) {
 	gluPerspective( 45.0, ratio, 0.1f, -100.0f );
 	
 	Configuracion::inst()->inicializar();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	GLfloat* pos = Camara::inst()->getposicionCamara();
+	GLfloat* pto = Camara::inst()->getpuntoVista();
+	gluLookAt( pos[0], pos[1], pos[2], pto[0], pto[1], pto[2], 0.f, 1.f, 0.f); 	
 	
 }
 

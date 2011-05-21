@@ -46,7 +46,40 @@ void PantallaNivel::dibujar() {
 	//glLoadIdentity();
 	
 	glEnable(GL_DEPTH_TEST);
-	
+
+	GLfloat lightPos[4] = {0.0, 5.8 ,0.0, 1.0};  ////posicion de la luz
+	GLfloat lightVector[3] = {0.0, -1.0 ,0.0};
+	////////
+	GLfloat luzAmbient[4] = {0.8,0.8,0.8,1.0};
+	GLfloat luzDiff[4] = {1.0, 1.0, 1.0,1.0};
+	GLfloat luzSpec[4] = {0.5, 0.5, 0.5,1.0};
+
+    ///luces del modelo
+	glLightfv(GL_LIGHT0,GL_SPOT_DIRECTION, lightPos);
+	glLightfv(GL_LIGHT0,GL_SPOT_DIRECTION,lightVector);
+	glLightf(GL_LIGHT0,GL_SPOT_CUTOFF,60);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDiff);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, luzSpec);
+
+	glEnable(GL_LIGHTING);
+	float* val_ptr = new float[4];
+	val_ptr[0]=0.0;
+	val_ptr[1]=0.0;
+	val_ptr[2]=-5.0;
+	val_ptr[3]=1.0;
+	glLightfv(GL_LIGHT1,GL_POSITION,val_ptr);
+
+	float* val_color = new float[3];
+	val_color[0]=1.0;
+	val_color[1]=1.0;
+	val_color[2]=1.0;
+
+	glLightfv(GL_LIGHT1,GL_DIFFUSE,val_color);
+	glLightfv(GL_LIGHT1,GL_SPECULAR,val_color);
+
+	glEnable(GL_LIGHT1);
+
 	// cambio isa 16/5/2011
 	//glTranslatef(0.f,0.f, -10.f);
 	
@@ -55,13 +88,13 @@ void PantallaNivel::dibujar() {
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_QUADS);
-	glColor3ub(0, 0, 255);	
-	float yaux = 0.f;
-	glVertex3f(-2.f, -2.f, yaux);
-	glVertex3f(2.f,-2.f, yaux);
+		glColor3ub(0, 0, 255);	
+		float yaux = 0.f;
+		glVertex3f(-2.f, -2.f, yaux);
+		glVertex3f(2.f,-2.f, yaux);
 	
-	glVertex3f(2.f, 2.f, yaux);
-	glVertex3f(-2.f, 2.f, yaux);
+		glVertex3f(2.f, 2.f, yaux);
+		glVertex3f(-2.f, 2.f, yaux);
 	glEnd();
 
 	this->nivelActual->dibujar();
@@ -83,7 +116,7 @@ void PantallaNivel::dibujar() {
 
 	gluDeleteQuadric(sphereQuadric);
 	*/
-	glFlush();
+	//glFlush();
 	SDL_GL_SwapBuffers();
 
 }
@@ -152,7 +185,7 @@ void PantallaNivel::procesarEventos() {
 void PantallaNivel::inicializar() {
 	this->idNivel=1;
 	this->nivelActual=new Nivel(this->idNivel);
-	this->nivelActual->iniciar();
+	//this->nivelActual->iniciar();
 	this->ticksIni = SDL_GetTicks();
 	this->ticksFin = this->ticksIni;
 	this->loop = true;
