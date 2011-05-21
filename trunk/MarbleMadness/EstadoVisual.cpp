@@ -16,7 +16,13 @@ void EstadoVisual::correr() {
 			//printf("voy a procesar eventos\n");
 			this->ticksIni = SDL_GetTicks();
 			procesarEventos();
-			actualizar(this->ticksIni-this->ticksFin);
+			if(!pausa){
+				if(this->ticksIni%1000==0)
+				{
+					//actualizarHUD
+				}
+				actualizar(this->ticksIni-this->ticksFin);
+			}
 			dibujar();
 			this->ticksFin = this->ticksIni;
 	}

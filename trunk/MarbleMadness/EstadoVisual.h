@@ -14,6 +14,7 @@ protected:
 	Uint32 ticksIni, ticksFin;
 	int refreshFreq;
 	bool loop;
+	bool pausa;
 	virtual void dibujar() = 0;
 	virtual void actualizar(int tiempo) = 0;
 	virtual void procesarEventos() = 0;
@@ -27,4 +28,4 @@ public:
 	virtual ~EstadoVisual(void);
 };
 
-#endif
+#endif ESTADO_VISUAL_H;

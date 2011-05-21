@@ -4,7 +4,7 @@
 Rampa::Rampa(void): ObjetoEstatico()
 {
 	this->objeto= new GLMmodel();
-	this->objeto = glmReadOBJ("C:/Users/Isabela/Desktop/objetoRampa10.obj");
+	this->objeto = glmReadOBJ("modelos/objetoRampa10.obj");
 }
 
 

@@ -44,7 +44,7 @@ void Bola::dibujar() {
 		glTranslatef(centro[0], centro[1], centro[2]);
 
 
-		gluSphere(sphereQuadric, this->r, 50, 50);
+//		gluSphere(sphereQuadric, this->r, 50, 50);
 	
 	// cambio isa 16/5/2011
 		glPopMatrix();

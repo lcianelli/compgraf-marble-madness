@@ -12,12 +12,14 @@
 #include "Juego.h"
 #include "EstadoVisual.h"
 #include "Nivel.h"
+#include "HUD.h"
 
 class PantallaNivel : public EstadoVisual
 {
 protected:
 	Nivel* nivelActual;
 	int idNivel;
+	HUD* hud;
 	void dibujar();
 	void actualizar(int tiempo);
 	void procesarEventos();

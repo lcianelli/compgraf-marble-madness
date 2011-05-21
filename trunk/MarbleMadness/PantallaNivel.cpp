@@ -1,29 +1,6 @@
 #include "PantallaNivel.h"
 #include "Camara.h"
 
-GLfloat xspeed = 0, zspeed= 0;
-const GLfloat XSPEED = 0.01f;
-const GLfloat ZSPEED = 0.01f;
-
-GLfloat xpos=0.f;
-GLfloat zpos=0.f;
-GLfloat ypos = 0.f;
-
-GLfloat alphaz = 0.f;
-GLfloat alphax = 0.f;
-
-bool saltar = false;
-const Uint32 T_SALTO = 500;//duracion del salto en ms
-Uint32 tiempoSaltoActual = 0;
-GLfloat Y_MAX = 1.f;
-GLfloat  A = -6.f/((T_SALTO+T_SALTO/2)*(T_SALTO/2));
-GLfloat B = -A*T_SALTO;
-
-/*void updateAlpha() {	
-	alphaz += (ticksIni - ticksFin) * xspeed * 20;
-	alphax += (ticksIni - ticksFin) * zspeed * 100;
-}*/
-
 
 PantallaNivel::PantallaNivel(void)
 {
@@ -98,24 +75,7 @@ void PantallaNivel::dibujar() {
 	glEnd();
 
 	this->nivelActual->dibujar();
-	/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
-	glPushMatrix();
-		glTranslatef(xpos,ypos,zpos);
-
-		glRotatef(alphax,1.f,0.f,0.f);
-		glRotatef(alphaz,0.f,0.f,1.0);
-
-		glColor3ub(255, 0, 0);
-	
-		GLUquadric* sphereQuadric = gluNewQuadric();
-
-		gluSphere(sphereQuadric, 1.0, 50, 50);
-	
-	glPopMatrix();
-
-	gluDeleteQuadric(sphereQuadric);
-	*/
 	//glFlush();
 	SDL_GL_SwapBuffers();
 
@@ -127,20 +87,6 @@ void PantallaNivel::actualizar(int tiempo) {
 		this->nivelActual->actualizar(tiempo);
 	}
 
-	/*Uint32 tiempoTranscurrido = ticksIni - ticksFin;
-	
-	xpos += (ticksIni - ticksFin)*xspeed;
-	zpos += (ticksIni - ticksFin)*zspeed;
-	updateAlpha();
-	if (saltar) {
-		ypos += (1.f*tiempoTranscurrido)*(2.f*A*tiempoSaltoActual+ A*tiempoTranscurrido+B);
-		cout << ypos << endl;
-		tiempoSaltoActual += tiempoTranscurrido;
-		if (tiempoSaltoActual >= T_SALTO) {
-			saltar = false;
-		}
-	}
-	ticksFin = ticksIni;*/
 }
 
 void PantallaNivel::procesarEventos() {
@@ -159,7 +105,6 @@ void PantallaNivel::procesarEventos() {
 				break;
 			case SDL_KEYUP:
 	printf("Estoy SDL_KEYUP\n");
-				handleKeyUp(&ev.key.keysym);
 				this->nivelActual->teclaLiberada(&ev.key.keysym);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
@@ -193,69 +138,57 @@ void PantallaNivel::inicializar() {
 
 void PantallaNivel::handleKeyDown(SDL_keysym* keysym) {
 	switch (keysym->sym) {
-	case SDLK_g:
-		Ambiente::aplicarGravedad(!Ambiente::aplicarG);
-		break;
+		case SDLK_p:
+			this->pausa=!this->pausa;
+			break;
+		case SDLK_q:
+			this->detener();
+			delete Juego::inst();
+			break;
+		case SDLK_g:
+			Ambiente::aplicarGravedad(!Ambiente::aplicarG);
+			break;
 		case SDLK_ESCAPE:
 			this->detener();
 			delete Juego::inst();
 			break;
-		case SDLK_LEFT:
-			xspeed = -XSPEED;
+		case SDLK_F1:
+			Configuracion::inst()->setWireframe(!Configuracion::inst()->getWireframe());
 			break;
-		case SDLK_RIGHT:
-			xspeed = XSPEED;
+		case SDLK_F2:
+			Configuracion::inst()->setInterpolado(!Configuracion::inst()->getInterpolado());
 			break;
-		case SDLK_UP:
-			zspeed = -ZSPEED;
+		case SDLK_F3:
+			Configuracion::inst()->setTexturas(!Configuracion::inst()->getTexturas());
 			break;
-		case SDLK_DOWN:
-			zspeed = ZSPEED;
+		case SDLK_F4:
+			Configuracion::inst()->aumentarR(0);
+			Configuracion::inst()->setCambiarLuz(true);
 			break;
-		case SDLK_a:
-			if (!saltar) {
-				saltar = true;
-				tiempoSaltoActual = 0;
-			}
+		case SDLK_F5:
+			Configuracion::inst()->aumentarG(0);
+			Configuracion::inst()->setCambiarLuz(true);
 			break;
-		case SDLK_SPACE:
-			if (!saltar) {
-				saltar = true;
-				tiempoSaltoActual = 0;
-			}
+		case SDLK_F6:
+			Configuracion::inst()->aumentarB(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_F7:
+			Configuracion::inst()->disminuirR(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_F8:
+			Configuracion::inst()->disminuirG(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_F9:
+			Configuracion::inst()->disminuirB(0);
+			Configuracion::inst()->setCambiarLuz(true);
 			break;
 		default:break;
 	}
 }
 
-void PantallaNivel::handleKeyUp(SDL_keysym* keysym) {
-
-
-	switch (keysym->sym) {
-			case SDLK_LEFT:
-			if (xspeed < 0.f) {
-				xspeed = 0.f;
-			}
-			break;
-		case SDLK_RIGHT:
-			if (xspeed > 0.f) {
-				xspeed = 0.f;
-			}
-			break;
-		case SDLK_UP:
-			if (zspeed < 0.f) {
-				zspeed = 0.f;
-			}			
-			break;
-		case SDLK_DOWN:
-			if (zspeed > 0.f) {
-				zspeed = 0.f;
-			}			
-			break;
-		default:break;
-	}
-
-}
 
 void PantallaNivel::cambiarNivel()
 {
@@ -263,3 +196,4 @@ void PantallaNivel::cambiarNivel()
 	delete this->nivelActual;
 	this->nivelActual=new Nivel(this->idNivel);
 }
+
