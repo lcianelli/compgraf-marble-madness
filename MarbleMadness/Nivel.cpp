@@ -34,12 +34,38 @@ void Nivel::iniciar() {
 	this->escenario->agregarObjeto(personaje);	
 }
 
+
+
 void Nivel::dibujar() {
 	//dibujo el escenario
+	if(Configuracion::inst()->getWireframe())
+		glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	else
+		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+
+	if(Configuracion::inst()->getTexturas())
+		glDisable(GL_TEXTURE_2D);
+	else
+		glEnable(GL_TEXTURE_2D);
+
+	if(Configuracion::inst()->getInterpolado()==true)
+		glShadeModel(GL_SMOOTH);
+	else
+		glShadeModel(GL_FLAT);
+	if(Configuracion::inst()->getCambiarLuz())
+	{
+		//Deshabilito, cambio y vuelvo a habilitar
+		glDisable( GL_LIGHTING );
+		glDisable( GL_LIGHT0 );		
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, Configuracion::inst()->getColorLuz(0));
+		glEnable( GL_LIGHTING );
+		glEnable( GL_LIGHT0 );
+	}
 
 	dibujarObjDinamicos();
 
 	this->escenario->dibujar();
+	
 
 	//TODO: Dibujar HUD
 }
@@ -75,8 +101,42 @@ void Nivel::teclaPresionada(SDL_keysym* keysym) {
 		case SDLK_RIGHT:
 			this->personaje->moverDerecha();
 			break;
+		case SDLK_F1:
+			Configuracion::inst()->setWireframe(!Configuracion::inst()->getWireframe());
+			break;
+		case SDLK_F2:
+			Configuracion::inst()->setInterpolado(!Configuracion::inst()->getInterpolado());
+			break;
+		case SDLK_F3:
+			Configuracion::inst()->setTexturas(!Configuracion::inst()->getTexturas());
+			break;
+		case SDLK_F4:
+			Configuracion::inst()->aumentarR(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_F5:
+			Configuracion::inst()->aumentarG(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_F6:
+			Configuracion::inst()->aumentarB(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_F7:
+			Configuracion::inst()->disminuirR(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_F8:
+			Configuracion::inst()->disminuirG(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
+		case SDLK_F9:
+			Configuracion::inst()->disminuirB(0);
+			Configuracion::inst()->setCambiarLuz(true);
+			break;
 	}
 }
+
 
 void Nivel::teclaLiberada(SDL_keysym* keysym) {
 	switch(keysym->sym) {

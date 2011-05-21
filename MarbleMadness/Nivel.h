@@ -7,6 +7,7 @@
 #include "FinEscenario.h"
 #include "InicioEscenario.h"
 #include "Personaje.h"
+#include "Configuracion.h"
 
 class Nivel
 {
