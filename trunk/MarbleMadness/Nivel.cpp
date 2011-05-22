@@ -8,7 +8,7 @@
 Nivel::Nivel(int num)
 {
 	this->numero = num;
-	this->puntaje = 0;
+	this->puntaje = 1000*num;
 	this->estado=no_iniciado;
 	this->escenario= new Escenario();
 	this->personaje=NULL;
