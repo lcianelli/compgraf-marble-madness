@@ -39,14 +39,13 @@ using std::string;
 
 	public:
 		FuenteFT(const char* fname, unsigned int h);
+		void limpiar();	
+		void imprimir(float x, float y, const char* fmt, ...);
 
-		void limpiar();
-
-		static void imprimir(const FuenteFT &fuente, float x, float y, const char* text, ...); 
 
 		~FuenteFT(void);
 	};
 
 }
 
-#endif FUENTE_FT_H
+#endif FUENTE_FT_H;

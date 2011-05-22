@@ -1,17 +1,23 @@
 #include "PantallaNivel.h"
 #include "Camara.h"
 
+float cnt1;
+float cnt2;
+
 
 PantallaNivel::PantallaNivel(void)
 {
 	this->ticksIni = 0;
 	this->ticksFin = 0;
 	this->loop= true;
+
+	
 }
 
 
 PantallaNivel::~PantallaNivel(void)
 {
+
 }
 
 
@@ -19,9 +25,7 @@ void PantallaNivel::dibujar() {
 
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-	
 	//glLoadIdentity();
-	
 	glEnable(GL_DEPTH_TEST);
 
 	//GLfloat lightPos[4] = {0.0, 5.8 ,0.0, 1.0};  ////posicion de la luz
@@ -75,6 +79,7 @@ void PantallaNivel::dibujar() {
 	glEnd();
 
 	this->nivelActual->dibujar();
+	this->hud->dibujarHud();
 
 	//glFlush();
 	SDL_GL_SwapBuffers();
@@ -86,7 +91,9 @@ void PantallaNivel::actualizar(int tiempo) {
 		
 		this->nivelActual->actualizar(tiempo);
 	}
-
+	if (this->hud != NULL) {
+		this->hud->actualizar(tiempo);
+	}
 }
 
 void PantallaNivel::procesarEventos() {
@@ -130,6 +137,7 @@ void PantallaNivel::procesarEventos() {
 void PantallaNivel::inicializar() {
 	this->idNivel=1;
 	this->nivelActual=new Nivel(this->idNivel);
+	this->hud = new HUD(1000, 1000*10*1, this->idNivel);
 	//this->nivelActual->iniciar();
 	this->ticksIni = SDL_GetTicks();
 	this->ticksFin = this->ticksIni;
