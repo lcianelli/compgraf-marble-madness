@@ -147,7 +147,8 @@ void PantallaNivel::inicializar() {
 void PantallaNivel::handleKeyDown(SDL_keysym* keysym) {
 	switch (keysym->sym) {
 		case SDLK_p:
-			this->pausa=!this->pausa;
+			Juego::inst()->pausar();
+			//this->pausa=!this->pausa;
 			break;
 		case SDLK_q:
 			this->detener();
@@ -204,4 +205,14 @@ void PantallaNivel::cambiarNivel()
 	delete this->nivelActual;
 	this->nivelActual=new Nivel(this->idNivel);
 }
+
+Nivel* PantallaNivel::getNivel() {
+	return this->nivelActual;
+}
+
+HUD* PantallaNivel::getHud() {
+	return this->hud;
+}
+
+
 

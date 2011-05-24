@@ -25,11 +25,15 @@ protected:
 	void procesarEventos();
 	void handleKeyDown(SDL_keysym* keysym);
 	void handleKeyUp(SDL_keysym* keysym);
+	
 	//no se si esto va aca
 	void cambiarNivel();
 public:
 	void inicializar();
 	PantallaNivel();
+	Nivel* getNivel();
+	HUD* getHud();
+
 	~PantallaNivel(void);
 	
 };

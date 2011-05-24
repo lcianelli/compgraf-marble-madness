@@ -14,7 +14,7 @@ void quitSDLApp(int code) {
 }
 
 Juego::Juego(void) {
-
+	
 
 }
 
@@ -24,16 +24,30 @@ Juego::~Juego(void) {
 }
 
 void Juego::cargarEstados() {
-
+	string nombreEstado = string("juego");
+	estados[nombreEstado] = new PantallaNivel();
+	nombreEstado = string("pausa");
+	estados[nombreEstado] = new PantallaPausa();
 }
 
 void Juego::setEstadoActual(EstadoVisual* estado) {
-
+	if (this->estadoActual != 0) {
+		this->estadoActual->detener();		
+	}
+	this->estadoActual = estado;
+	this->estadoActual->inicializar();
+	this->estadoActual->correr();
 }
+
+void Juego::setEstadoActual(const string &idEstado) {
+	setEstadoActual(estados[idEstado]);
+}
+
 
 void Juego::inicializar(int w, int h) {
 	this->w = w;
 	this->h = h;
+	cargarEstados();
 	//inicializamos el subsistema de video de SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0 ) {
 		fprintf(stderr, "Video initialization failed: %s\n", SDL_GetError());		
@@ -63,7 +77,7 @@ void Juego::inicializar(int w, int h) {
 
 void Juego::iniciar() {
 	//Como juego es estatico no preciso pasarlo al constructor.
-	this->estadoActual = new PantallaNivel();
+	this->estadoActual = estados["juego"];
 	this->estadoActual->inicializar();
 
 	printf("Voy a correr\n");
@@ -100,5 +114,25 @@ void setupOpengl(int width, int height) {
 
 void Juego::avanzarNivel(){
 	//this->estadoActual->cambiarNivel();
+}
+
+EstadoVisual* Juego::getEstado(const string &idEstado) {
+	return estados[idEstado];
+}
+
+EstadoVisual* Juego::getEstadoActual() {
+	return this->estadoActual;
+}
+
+void Juego::pausar() {
+	PantallaPausa* pPausa = dynamic_cast<PantallaPausa*>(getEstado("pausa"));
+	PantallaNivel* pNivel = dynamic_cast<PantallaNivel*>(getEstado("juego"));
+	pPausa->setNivel(pNivel->getNivel());
+	pPausa->setHud(pNivel->getHud());
+	this->setEstadoActual(pPausa);
+}
+
+void Juego::resumir() {
+
 }
 

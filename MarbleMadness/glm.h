@@ -11,7 +11,8 @@
       coordinate generation (spheremap and planar projections) + more.
 
  */
-
+#ifndef MARBLE_GLM_H
+#define MARBLE_GLM_H
 
 #include <SDL.h>
 #include <SDL_opengl.h>
@@ -268,8 +269,10 @@ glmWeld(GLMmodel* model, GLfloat epsilon);
 /* glmLoadTexture: loads file texture.
  *
  */
-GLuint glmLoadTexture(char* pathTexture);
+GLuint glmLoadTexture(const char* pathTexture);
 
 
 GLvoid
 glmTransformar(GLMmodel* model, GLfloat altura);
+
+#endif MARBLE_GLM_H;
