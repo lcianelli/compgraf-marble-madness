@@ -4,6 +4,7 @@
 
 #include "EstadoVisual.h"
 #include "PantallaNivel.h"
+#include "PantallaPausa.h"
 #include <string>
 #include <map>
 #include <SDL.h>
@@ -20,9 +21,10 @@ private:
 	static Juego* instancia;
 	int w, h;
 	SDL_Surface* pantalla;
+	
 	EstadoVisual* estadoActual;
 
-	//map<string, EstadoVisual*> estados;
+	map<string, EstadoVisual*> estados;
 	Juego(void);
 	
 	void cargarEstados();
@@ -34,7 +36,19 @@ public:
 		}
 		return instancia;
 	}
+
 	void setEstadoActual(EstadoVisual* estado);
+
+	void setEstadoActual(const string &idEstado);
+
+	EstadoVisual* getEstado(const string &idEstado);
+
+	EstadoVisual* getEstadoActual();
+
+	void pausar();
+
+	void resumir();
+
 	/*
 	incialia la ventana sdl con ancho w y alto h, fullscreen, y habilitada para opengl
 	*/
@@ -46,5 +60,5 @@ public:
 	~Juego(void);
 };
 
-#endif
+#endif MARBLE_JUEGO_H;
 

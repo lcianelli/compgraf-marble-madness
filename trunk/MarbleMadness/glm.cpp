@@ -1896,7 +1896,7 @@ glmWeld(GLMmodel* model, GLfloat epsilon)
 
 
 
-GLuint glmLoadTexture(char* pathTexture)
+GLuint glmLoadTexture(const char* pathTexture)
 {
 	GLuint texture;			// This is a handle to our texture object
 	
