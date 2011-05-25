@@ -1,39 +1,26 @@
-#include "BotonGUI.h"
+#include "CheckboxGUI.h"
 
 namespace mmgui {
 
-BotonGUI::BotonGUI() {
+CheckboxGUI::CheckboxGUI(bool checked) {
 	this->h = this->w = this->x = this->y = 0;
 	this->idTextura = -1;
+	this->idTexturaChecked  = -1;
+	this->checked = checked;
 }
-
-BotonGUI::BotonGUI(int x, int y, int w, int h) {
+	
+CheckboxGUI::CheckboxGUI(int x, int y, int w, int h, bool checked) {
 	setLimites(x, y, w, h);
 	this->idTextura = -1;
+	this->idTexturaChecked = -1;
+	this->checked = checked;
 }
 
-BotonGUI::BotonGUI(int x, int y, int w, int h, const string &texto) {
-	setLimites(x, y, w, h);
-	this->texto = string(texto);
-	this->idTextura = -1;
-}
-
-BotonGUI::BotonGUI(const string &texto) {
-	setLimites(0, 0, 0, 0);
-	this->texto = string(texto);
-	this->idTextura = -1;
-}
-
-void BotonGUI::setTexto(const string &texto) {
-	this->texto = string(texto);
-}
-
-BotonGUI::~BotonGUI(void)
+CheckboxGUI::~CheckboxGUI(void)
 {
-	ObjetoGUI::~ObjetoGUI();
 }
 
-void BotonGUI::dibujar() {
+void CheckboxGUI::dibujar() {
 
 	/*if (this->idTextura >= 0) {
 		glBindTexture(GL_TEXTURE_2D, this->idTextura);
@@ -41,9 +28,28 @@ void BotonGUI::dibujar() {
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);	
 		
 	}*/
+	if (this->checked) {
+		float wdiezporc = this->w*0.1f;
+		float hdiezporc = this->h*0.1f;
+		//glTexCoord2f(1.0f, 0.0f);
+		glColor3f(color.X(), color.Y(), color.Z());
+		glBegin(GL_QUADS);
+
+		glVertex3f(this->w-wdiezporc, 0+hdiezporc, 0);
+		//glTexCoord2f(1.0f, 1.0f); 
+		glVertex3f(this->w-wdiezporc, this->h-wdiezporc, 0);
+		//glTexCoord2f(0.0f, 1.0f); 
+		glVertex3f(0+wdiezporc, this->h-wdiezporc, 0);
+		//glTexCoord2f(0.0f, 0.0f); 
+		glVertex3f(0+wdiezporc, 0+hdiezporc, 0);	
+		glEnd();
+	}
+
+
+
 	//glTexCoord2f(1.0f, 0.0f);
 	glBegin(GL_QUADS);
-	glColor3f(color.X(), color.Y(), color.Z());
+	glColor3f(1.f, 1.f, 1.f);
 	glVertex3f(this->w, 0, 0);
 	//glTexCoord2f(1.0f, 1.0f); 
 	glVertex3f(this->w, this->h, 0);
@@ -52,9 +58,6 @@ void BotonGUI::dibujar() {
 	//glTexCoord2f(0.0f, 0.0f); 
 	glVertex3f(0, 0, 0);	
 	glEnd();
-	if (!texto.empty()) {
-		//TODO: dibujar texto
-	}
 
 	vector<ObjetoGUI*>::iterator it;
 	for (it = this->hijos.begin(); it != this->hijos.end(); it++) {

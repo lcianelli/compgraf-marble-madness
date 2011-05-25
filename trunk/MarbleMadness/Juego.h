@@ -5,6 +5,7 @@
 #include "EstadoVisual.h"
 #include "PantallaNivel.h"
 #include "PantallaPausa.h"
+#include "PantallaOpciones.h"
 #include <string>
 #include <map>
 #include <SDL.h>
@@ -49,6 +50,8 @@ public:
 
 	void resumir();
 
+	void opciones();
+
 	/*
 	incialia la ventana sdl con ancho w y alto h, fullscreen, y habilitada para opengl
 	*/
@@ -56,7 +59,8 @@ public:
 	void iniciar();
 
 	void avanzarNivel();
-
+	void reiniciarNivel();
+	void salir();
 	~Juego(void);
 };
 

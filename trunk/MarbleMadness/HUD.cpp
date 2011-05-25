@@ -39,13 +39,6 @@ void HUD::dibujarHud()
 			glLoadIdentity();
 			glViewport(0, 0, (GLsizei) s->w, (GLsizei) s->h);
 			
-			
-			glBegin(GL_QUADS);
-				glVertex3f(200.f, 200.f, 0.f);
-				glVertex3f(400.f, 200.f, 0.f);
-				glVertex3f(400.f, 400.f, 0.f);
-				glVertex3f(200.f, 400.f, 0.f);
-			glEnd();
 		glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();

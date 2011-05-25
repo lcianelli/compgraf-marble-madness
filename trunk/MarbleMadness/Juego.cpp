@@ -28,6 +28,8 @@ void Juego::cargarEstados() {
 	estados[nombreEstado] = new PantallaNivel();
 	nombreEstado = string("pausa");
 	estados[nombreEstado] = new PantallaPausa();
+	nombreEstado = string("opciones");
+	estados[nombreEstado] = new PantallaOpciones();
 }
 
 void Juego::setEstadoActual(EstadoVisual* estado) {
@@ -133,6 +135,26 @@ void Juego::pausar() {
 }
 
 void Juego::resumir() {
+	PantallaNivel* pNivel = dynamic_cast<PantallaNivel*>(getEstado("juego"));
+	this->setEstadoActual(pNivel);
 
 }
 
+
+void Juego::reiniciarNivel() {
+	PantallaNivel* pNivel = dynamic_cast<PantallaNivel*>(getEstado("juego"));
+	pNivel->setNivel(0);
+	this->setEstadoActual(pNivel);
+}
+
+void Juego::salir() {
+	//TODO: implementar salida del juego
+}
+
+void Juego::opciones() {
+	PantallaOpciones* pOpciones = dynamic_cast<PantallaOpciones*>(getEstado("opciones"));
+	PantallaNivel* pNivel = dynamic_cast<PantallaNivel*>(getEstado("juego"));
+	pOpciones->setNivel(pNivel->getNivel());
+	pOpciones->setHud(pNivel->getHud());
+	this->setEstadoActual(pOpciones);
+}

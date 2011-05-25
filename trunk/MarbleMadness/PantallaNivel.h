@@ -13,6 +13,8 @@
 #include "EstadoVisual.h"
 #include "Nivel.h"
 #include "HUD.h"
+#include "Vector.h"
+#include "BotonGUI.h"
 
 class PantallaNivel : public EstadoVisual
 {
@@ -30,10 +32,11 @@ protected:
 	void cambiarNivel();
 public:
 	void inicializar();
+	void resumir();
 	PantallaNivel();
 	Nivel* getNivel();
 	HUD* getHud();
-
+	void setNivel(Nivel* niv);
 	~PantallaNivel(void);
 	
 };

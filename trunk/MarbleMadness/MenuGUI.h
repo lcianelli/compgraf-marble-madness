@@ -23,6 +23,8 @@ public:
 	void dibujar();
 
 	BotonGUI* getBotonCiere() const { return this->botonCierre;} 
+
+	ObjetoGUI* objetoClickeado(int x, int y);
 	
 	virtual ~MenuGUI(void);
 };
