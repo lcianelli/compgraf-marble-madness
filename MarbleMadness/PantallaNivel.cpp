@@ -10,7 +10,9 @@ PantallaNivel::PantallaNivel(void)
 	this->ticksIni = 0;
 	this->ticksFin = 0;
 	this->loop= true;
-
+	this->idNivel = 1;
+	nivelActual = NULL;
+	hud = NULL;
 	
 }
 
@@ -135,9 +137,12 @@ void PantallaNivel::procesarEventos() {
 }
 
 void PantallaNivel::inicializar() {
-	this->idNivel=1;
-	this->nivelActual=new Nivel(this->idNivel);
-	this->hud = new HUD(1000, 1000*10*1, this->idNivel);
+	if (this->nivelActual == NULL) {
+		
+		this->nivelActual=new Nivel(this->idNivel);
+		this->hud = new HUD(1000, 1000*10*1, this->idNivel);
+	}
+	
 	//this->nivelActual->iniciar();
 	this->ticksIni = SDL_GetTicks();
 	this->ticksFin = this->ticksIni;
@@ -214,5 +219,14 @@ HUD* PantallaNivel::getHud() {
 	return this->hud;
 }
 
+void PantallaNivel::resumir() {
+	this->ticksIni = SDL_GetTicks();
+	this->ticksFin = this->ticksIni;
+	this->loop = true;
+}
+
+void PantallaNivel::setNivel(Nivel* niv) {
+	this->nivelActual = niv;
+}
 
 

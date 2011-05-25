@@ -5,6 +5,7 @@
 #include <string>
 
 #include "ObjetoGUI.h"
+#include "Vector.h"
 
 namespace mmgui {
 

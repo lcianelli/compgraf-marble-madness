@@ -5,6 +5,7 @@
 #include <vector>
 #include <SDL_opengl.h>
 #include <SDL.h>
+#include "Vector.h"
 
 namespace mmgui {
 
@@ -17,7 +18,7 @@ protected:
 	ObjetoGUI* padre;
 	vector<ObjetoGUI*> hijos;
 	int x, y, w, h; //dimensiones del objeto
-	
+	Vector color;
 public:
 
 	void agegarHijo(ObjetoGUI* h);
@@ -36,6 +37,8 @@ public:
 	inline int Y() {return this->y;}
 	inline int W() {return this->w;}
 	inline int H() {return this->h;}
+	inline Vector Color() {return this->color;}
+	inline void Color(const Vector &col) { this->color = Vector(col);}
 
 	inline void setPadre(ObjetoGUI* padre) { this->padre = padre;}
 	

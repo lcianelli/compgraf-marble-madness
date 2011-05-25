@@ -1,28 +1,28 @@
 #pragma once
-#ifndef PANTALLA_PAUSA_H
-#define PANTALLA_PAUSA_H
+#ifndef PANTALLA_OPCIONES_H
+#define PANTALLA_OPCIONES_H
 
-#include "Juego.h"
 #include "EstadoVisual.h"
+#include "Juego.h"
+#include "Vector.h"
+#include "BotonGUI.h"
+#include "CheckboxGUI.h"
+#include "MenuGUI.h"
 #include "Nivel.h"
 #include "HUD.h"
-#include "BotonGUI.h"
-#include "MenuGUI.h"
-#include "ManejadorTextura.h"
 
 using namespace mmgui;
 
-class PantallaPausa :
-	public EstadoVisual
+class PantallaOpciones : public EstadoVisual
 {
 private:
+	BotonGUI* aceptarBtn;
+	CheckboxGUI *wireframe, *interpolado, *texturas;
+	CheckboxGUI* dirluz[4];
+
+	MenuGUI* menuOpciones;
 	bool mouseDown;
 	SDL_Surface* s;
-	BotonGUI* resumeBtn;
-	BotonGUI* opcionesBtn;
-	BotonGUI* salirBtn;
-	BotonGUI* reiniciarBtn;
-	MenuGUI* menuPausa;
 protected:
 	Nivel* nivelActual;
 	HUD* hud;
@@ -42,12 +42,9 @@ public:
 
 	void cambiarNivel();
 	void resumir();
-	PantallaPausa(void);
-	~PantallaPausa(void);
-
-	
-
+	PantallaOpciones(void);
+	~PantallaOpciones(void);
 };
 
+#endif PANTALLA_OPCIONES_H;
 
-#endif PANTALLA_PAUSA_H;
