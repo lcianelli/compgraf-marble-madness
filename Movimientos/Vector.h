@@ -24,6 +24,7 @@ public:
 	Vector(const Vector& v) : _x(v._x), _y(v._y), _z(v._z), _status(v._status) {}
 	Vector() : _x(0.f), _y(0.f), _z(0.f), _status(INVALID) {}
 	Vector(float x, float y, float z) : _x(x), _y(y), _z(z), _status(DEFAULT) {}
+	Vector(float* floatv) : _x(floatv[0]), _y(floatv[1]), _z(floatv[2]), _status(DEFAULT) {}
 
 	//creo el vector en el pto medio de dos lineas
 	Vector(const Rayo &linea1, const Rayo &linea2);
@@ -68,6 +69,8 @@ public:
 
 	float dist(const Vector &v) const { return (*this-v).norma();}
 	float distCuad(const Vector &v) const {return (*this-v).norma2();}
+	
+	float* floatArr() const { float* arr = new float[3];arr[0] = _x; arr[1] = _y; arr[2] = _z; return arr;}
 	
 	~Vector(void);
 };
