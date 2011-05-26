@@ -94,6 +94,31 @@ Matriz::Matriz(float* trasl)
 	_Mx[3][0] = 0.f; _Mx[3][1] = 0.f; _Mx[3][2] = 0.f; _Mx[3][3] = 1.f;
 }
 
+//Genera la matriz de reflexion respecto al plano indicado. si plano==1 XY, plano==2 XZ plano==3 YZ
+Matriz::Matriz(int plano)
+{
+	//Matriz de reflexion respecto a XY
+	if(plano==1)
+	{
+		_Mx[0][0] = 1.f; _Mx[0][1] = 0.f; _Mx[0][2] = 0.f; _Mx[0][3] = 0.f;
+		_Mx[1][0] = 0.f; _Mx[1][1] = 1.f; _Mx[1][2] = 0.f; _Mx[1][3] = 0.f;
+		_Mx[2][0] = 0.f; _Mx[2][1] = 0.f; _Mx[2][2] = -1.f; _Mx[2][3] = 0.f;
+		_Mx[3][0] = 0.f; _Mx[3][1] = 0.f; _Mx[3][2] = 0.f; _Mx[3][3] = 1.f;		
+	}else if(plano==2)//Matriz de reflexion respecto a XZ
+	{
+		_Mx[0][0] = 1.f; _Mx[0][1] = 0.f; _Mx[0][2] = 0.f; _Mx[0][3] = 0.f;
+		_Mx[1][0] = 0.f; _Mx[1][1] = -1.f; _Mx[1][2] = 0.f; _Mx[1][3] = 0.f;
+		_Mx[2][0] = 0.f; _Mx[2][1] = 0.f; _Mx[2][2] = 1.f; _Mx[2][3] = 0.f;
+		_Mx[3][0] = 0.f; _Mx[3][1] = 0.f; _Mx[3][2] = 0.f; _Mx[3][3] = 1.f;	
+	}else //Matriz de reflexion respecto a YZ
+	{
+		_Mx[0][0] = -1.f; _Mx[0][1] = 0.f; _Mx[0][2] = 0.f; _Mx[0][3] = 0.f;
+		_Mx[1][0] = 0.f; _Mx[1][1] = 1.f; _Mx[1][2] = 0.f; _Mx[1][3] = 0.f;
+		_Mx[2][0] = 0.f; _Mx[2][1] = 0.f; _Mx[2][2] = 1.f; _Mx[2][3] = 0.f;
+		_Mx[3][0] = 0.f; _Mx[3][1] = 0.f; _Mx[3][2] = 0.f; _Mx[3][3] = 1.f;	
+	}
+}
+
 float* Matriz::getMatrizVector()
 {
 	float* mVector= new float[16];
