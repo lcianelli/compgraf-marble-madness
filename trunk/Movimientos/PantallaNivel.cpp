@@ -50,12 +50,12 @@ void dibujarEsfera(const Vector &pos, float _radio, const Vector &_color) {
 
 	glPushMatrix();
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
-	
-	
-	glTranslatef(bola.centro.X(), bola.centro.Y(), bola.centro.Z());
 	glRotatef(anguloXZ, vecRotXZ.X(), vecRotXZ.Y(), vecRotXZ.Z());	
 	glRotatef(anguloXY, vecRotXY.X(), vecRotXY.Y(), vecRotXY.Z());
 	glRotatef(anguloYZ, vecRotYZ.X(), vecRotYZ.Y(), vecRotYZ.Z());
+	
+	glTranslatef(bola.centro.X(), bola.centro.Y(), bola.centro.Z());
+	
 		glColor3f(_color.X(), _color.Y(), _color.Z());
 	
 		GLUquadric* sphereQuadric = gluNewQuadric();
@@ -111,6 +111,7 @@ void dibujarPlano(const Plano &pl, float w, float h, const Vector &_color) {
 	glRotatef(anguloXZ, vecRotXZ.X(), vecRotXZ.Y(), vecRotXZ.Z());	
 	glRotatef(anguloXY, vecRotXY.X(), vecRotXY.Y(), vecRotXY.Z());
 	glRotatef(anguloYZ, vecRotYZ.X(), vecRotYZ.Y(), vecRotYZ.Z());
+	glTranslatef(-pl.Posicion().X(), -pl.Posicion().Y(), -pl.Posicion().Z());
 	dibujarEjes();
 	glColor3f(_color.X(), _color.Y(), _color.Z());
 	glBegin(GL_QUADS);
@@ -194,7 +195,7 @@ void PantallaNivel::actualizar(int tiempo) {
 				bola.vel += bola.ac * dT;
 			dT = 0.f;
 			
-		}
+		//}
 	}
 	
 	
