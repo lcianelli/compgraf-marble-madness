@@ -21,6 +21,10 @@ public:
 					float mx20, float mx21, float mx22, float mx23,
 						float mx30, float mx31, float mx32, float mx33);
 
+
+	//Retorna la matriz de traslacion
+	Matriz(float* trasl);
+
 	//Retorna la matriz en forma de vector, por columnas.
 	float* getMatrizVector();
 

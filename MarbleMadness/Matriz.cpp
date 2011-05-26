@@ -86,6 +86,14 @@ Matriz::Matriz(float mx00, float mx01, float mx02, float mx03,
 
 }
 
+Matriz::Matriz(float* trasl)
+{
+	_Mx[0][0] = 1.f; _Mx[0][1] = 0.f; _Mx[0][2] = 0.f; _Mx[0][3] = trasl[0];
+	_Mx[1][0] = 0.f; _Mx[1][1] = 1.f; _Mx[1][2] = 0.f; _Mx[1][3] = trasl[1];
+	_Mx[2][0] = 0.f; _Mx[2][1] = 0.f; _Mx[2][2] = 1.f; _Mx[2][3] = trasl[2];
+	_Mx[3][0] = 0.f; _Mx[3][1] = 0.f; _Mx[3][2] = 0.f; _Mx[3][3] = 1.f;
+}
+
 float* Matriz::getMatrizVector()
 {
 	float* mVector= new float[16];
