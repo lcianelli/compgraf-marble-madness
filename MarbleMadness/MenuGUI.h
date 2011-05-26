@@ -4,7 +4,7 @@
 
 #include "ObjetoGUI.h"
 #include "BotonGUI.h"
-
+#include "Configuracion.h"
 namespace mmgui {
 
 class MenuGUI : public ObjetoGUI

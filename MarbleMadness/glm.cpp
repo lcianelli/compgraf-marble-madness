@@ -1924,32 +1924,32 @@ GLuint glmLoadTexture(const char* pathTexture)
 		printf("%s\n",SDL_GetError());
 	}
 
-	dib = FreeImage_ConvertTo24Bits(dib);
+	dib = FreeImage_ConvertTo32Bits(dib);
 	glGenTextures( 1, &texture );
+	glBindTexture( GL_TEXTURE_2D, texture );
 
-	// Create Nearest Filtered Texture
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	glTexParameteri( GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
-	// Cada pixel va a ocupar 3 Bytes ... 24 bits
-	BYTE *bits = new BYTE[FreeImage_GetWidth(dib) * FreeImage_GetHeight(dib) * 3];
+	// Cada pixel va a ocupar 4 Bytes ... 32 bits
+	BYTE *bits = new BYTE[FreeImage_GetWidth(dib) * FreeImage_GetHeight(dib) * 4];
 	//Obtiene todos los bits de la imagen y lo castea a puntero de bytes
 	BYTE *pixels = (BYTE*)FreeImage_GetBits(dib);
 	for(unsigned int pix=0; pix< FreeImage_GetWidth(dib) * FreeImage_GetHeight(dib); pix++){
 		// da vuelta los colores de cada pixel para q qde bien (cada pixel ocupa 3 bytes)
-		bits[pix*3+0]=pixels[pix*3+2];
-		bits[pix*3+1]=pixels[pix*3+1];
-		bits[pix*3+2]=pixels[pix*3+0];
+		bits[pix*4+0]=pixels[pix*4+2];
+		bits[pix*4+1]=pixels[pix*4+1];
+		bits[pix*4+2]=pixels[pix*4+0];
+		bits[pix*4+3]=pixels[pix*4+3];
 	}
-	glTexImage2D( GL_TEXTURE_2D, 0, 3, FreeImage_GetWidth(dib), FreeImage_GetHeight(dib), 0,GL_RGB, GL_UNSIGNED_BYTE, bits );
+	glTexImage2D( GL_TEXTURE_2D, 0, 4, FreeImage_GetWidth(dib), FreeImage_GetHeight(dib), 0,GL_RGBA, GL_UNSIGNED_BYTE, bits );
 
 	FreeImage_Unload(dib);
 	delete bits;
 
 	if (glGetError() == GL_INVALID_ENUM)
 	{
-		printf("ERROR!! invalid enum %s\n");	
+		printf("ERROR!! invalid enum %s\n", SDL_GetError());	
 	}
 	if (glGetError() == GL_INVALID_VALUE)
 	{
@@ -1959,6 +1959,7 @@ GLuint glmLoadTexture(const char* pathTexture)
 	{
 		printf("ERROR!! invalid operation %s\n");	
 	} 
+
 
 	return texture;
 

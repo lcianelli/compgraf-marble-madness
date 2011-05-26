@@ -150,6 +150,7 @@ void PantallaNivel::inicializar() {
 }
 
 void PantallaNivel::handleKeyDown(SDL_keysym* keysym) {
+	float* dirLuz = new float[4];
 	switch (keysym->sym) {
 		case SDLK_p:
 			Juego::inst()->pausar();
@@ -199,8 +200,49 @@ void PantallaNivel::handleKeyDown(SDL_keysym* keysym) {
 			Configuracion::inst()->disminuirB(0);
 			Configuracion::inst()->setCambiarLuz(true);
 			break;
+		case SDLK_7:
+			
+			dirLuz[0] = 1.f;
+			dirLuz[1] = 1.f;
+			dirLuz[2] = 1.f;
+			dirLuz[3] = 0.f;
+			Configuracion::inst()->setDireccionLuz(0, dirLuz);
+			Configuracion::inst()->setCambiarLuz(true);
+			
+			break;
+		case SDLK_8:
+			
+			dirLuz[0] = 1.f;
+			dirLuz[1] = 1.f;
+			dirLuz[2] = -1.f;
+			dirLuz[3] = 0.f;
+			Configuracion::inst()->setDireccionLuz(0, dirLuz);
+			Configuracion::inst()->setCambiarLuz(true);
+			
+			break;
+		case SDLK_9:
+			
+			dirLuz[0] = -1.f;
+			dirLuz[1] = 1.f;
+			dirLuz[2] = -1.f;
+			dirLuz[3] = 0.f;
+			Configuracion::inst()->setDireccionLuz(0, dirLuz);
+			Configuracion::inst()->setCambiarLuz(true);
+			
+			break;
+		case SDLK_0:
+			
+			dirLuz[0] = -1.f;
+			dirLuz[1] = 1.f;
+			dirLuz[2] = 1.f;
+			dirLuz[3] = 0.f;
+			Configuracion::inst()->setDireccionLuz(0, dirLuz);
+			Configuracion::inst()->setCambiarLuz(true);
+			
+			break;
 		default:break;
 	}
+	delete[] dirLuz;
 }
 
 

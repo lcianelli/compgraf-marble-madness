@@ -43,6 +43,7 @@ void HUD::dibujarHud()
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
+	glEnable(GL_LIGHTING);
 
 	////
 

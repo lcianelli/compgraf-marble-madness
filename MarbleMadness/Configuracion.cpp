@@ -29,7 +29,11 @@ void Configuracion::inicializar()
 	instancia->wireframe=false;
 	instancia->interpolado=true;
 	instancia->velocidad=1.0f;
+	instancia->direccionesLuz[0][0]=-1.0f;
+	instancia->direccionesLuz[0][1]=1.0f;
 	instancia->direccionesLuz[0][2]=1.0f;
+	instancia->direccionesLuz[0][3]=0.0f;
+
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, instancia->lucesAmbiente[0]);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, instancia->lucesDifusas[0]);
@@ -128,4 +132,14 @@ bool Configuracion::getCambiarLuz()
 void Configuracion::setCambiarLuz(bool c)
 {
 	instancia->cambiarLuz=c;
+}
+
+float* Configuracion::getDireccionLuz(int id) {
+	return direccionesLuz[id];
+}
+
+void Configuracion::setDireccionLuz(int id, float* dir) {
+	for (int i = 0; i < 4; i++) {
+		direccionesLuz[id][i] = dir[i];
+	}
 }
