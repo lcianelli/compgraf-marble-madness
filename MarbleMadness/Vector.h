@@ -45,10 +45,14 @@ public:
 	static Vector defecto(const Vector &v, Vector &resultado) {resultado = v; return resultado.defecto();}
 	static Vector defecto(const Vector &v) {return Vector(v).defecto();}
 
-	float norma() const { return (esValido() ? (esUnitario() ? 1.f : sqrt(sqr(X())+sqr(Y())+sqr(Z()))) : 0.f);}
+	float norma() const { return ( sqrt(sqr(X())+sqr(Y())+sqr(Z())));}
 	float norma2() const {return (esValido() ? (esUnitario() ? 1.f : (sqr(X())+sqr(Y())+sqr(Z()))) : 0.f);}
 	
-	float escalar(const Vector &v) const { return ( (esValido() && v.esValido()) ? (X()*v.X() + Y()*v.Y() + Z()*v.Z()) : 0.f  ); }
+	//cambio isabela!!!
+	//float escalar(const Vector &v) const { return ( (esValido() && v.esValido()) ? (X()*v.X() + Y()*v.Y() + Z()*v.Z()) : 0.f  ); }
+
+	float escalar(const Vector &v) const { return ( (X()*v.X() + Y()*v.Y() + Z()*v.Z()) ); }
+
 	static float escalar(const Vector &v1, const Vector &v2) { return v1.escalar(v2);}
 
 	static Vector &suma(const Vector &v1, const Vector &v2, Vector &res);
@@ -71,7 +75,12 @@ public:
 	float distCuad(const Vector &v) const {return (*this-v).norma2();}
 	
 	float* floatArr() const { float* arr = new float[3];arr[0] = _x; arr[1] = _y; arr[2] = _z; return arr;}
-	
+
+	//agregamos 23/5/2011
+	bool igual(const Vector &v){ return ((X()==v.X())&&(Y()==v.Y())&&(Z()==v.Z()));}
+
+	void imprimir();
+
 	~Vector(void);
 };
 

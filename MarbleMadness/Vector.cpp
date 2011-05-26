@@ -1,6 +1,8 @@
 #include "Vector.h"
 #include "Rayo.h"
 
+#include <stdio.h>
+
 /*Vector::Vector(const Rayo &linea1, const Rayo &linea2) {
 	Vector p1, p2;
 	if (linea1.puntosAdyacentes(linea2, p1, p2)) {
@@ -75,9 +77,11 @@ Vector &Vector::resta(const Vector &v1, const Vector &v2, Vector &res) {
 Vector &Vector::prodCruzado(const Vector &v1, const Vector &v2, Vector &res) {
 	
 	if (v1.esValido() && v2.esValido()) {
+
 		res._x = v1._y*v2._z - v1._z*v2._y;
 		res._y = v1._z*v2._x - v1._x*v2._z;
 		res._z = v1._x*v2._y - v1._y*v2._x;
+
 		res._status = DEFAULT;
 	} else {
 		res = Vector();
@@ -95,6 +99,11 @@ Vector &Vector::multiplicar(const Vector &v, const float escala, Vector &res) {
 		res = Vector();
 	}
 	return res;
+}
+
+void Vector::imprimir(){
+	printf("Vector: %f %f %f \n",X(),Y(),Z());
+
 }
 
 
