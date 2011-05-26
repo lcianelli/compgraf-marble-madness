@@ -15,6 +15,8 @@ public:
 	Matriz();
 	Matriz(float phi, float theta, float psi);
 	Matriz(float mx00, float mx01, float mx02, float mx10, float mx11, float mx12, float mx20, float mx21, float mx22);
+	Matriz(const Vector &eje, float angulo);
+
 
 	float operator()(int row, int col) const { return _Mx[row][col];}
 	float &operator()(int row, int col) {return _Mx[row][col];}
@@ -52,6 +54,9 @@ public:
 	static Matriz &Matriz::inversa(const Matriz &m1, Matriz &res);
 	static Matriz Matriz::inversa(const Matriz &m1) { Matriz tm; return inversa(m1, tm);}
 	Matriz inversa() const {Matriz tm; return inversa(*this, tm);}
+
+	Matriz &trasladar(const Vector &vt);
+	Matriz &rotar(const Vector &eje, float angulo);
 	
 	~Matriz(void);
 };

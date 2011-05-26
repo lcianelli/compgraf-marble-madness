@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-#define EPSILON 1.0e-4
+#define EPSILON 1.0e-6
 #define CERO EPSILON
 
 #define M_PI 3.1415926535

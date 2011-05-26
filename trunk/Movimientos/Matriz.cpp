@@ -26,6 +26,25 @@ Matriz::Matriz(float mx00, float mx01, float mx02, float mx10, float mx11, float
 	_Mx[2][0] = mx20; _Mx[2][1] = mx21; _Mx[2][2] = mx22;
 }
 
+Matriz::Matriz(const Vector &eje, float angulo) {
+	float c = cos(angulo);
+	float s = sin(angulo);
+	Vector u = Vector(eje).unitario();
+	float ux = u.X();
+	float uy = u.Y();
+	float uz = u.Z();
+
+	_Mx[0][0]= c + sqr(ux)*(1-c);
+	_Mx[0][1]= ux*uy*(1-c) - uz*s;
+	_Mx[0][2]= ux*uz*(1-c) + uy*s;
+	_Mx[1][0]= uy*ux*(1-c)+uz*s;
+	_Mx[1][1]= c+sqr(uy)*(1-c);
+	_Mx[1][2]= uy*uz*(1-c)- ux*s;
+	_Mx[2][0]= uz*ux*(1-c) - uy*s;
+	_Mx[2][1]= uz*uy*(1-c) + ux*s;
+	_Mx[2][2]= c+sqr(uz)*(1-c);
+}
+
 Matriz &Matriz::suma(const Matriz &m1, const Matriz &m2, Matriz &res) {
 	res._Mx[0][0] = m1._Mx[0][0] + m2._Mx[0][0];
 	res._Mx[0][1] = m1._Mx[0][1] + m2._Mx[0][1];
@@ -126,5 +145,15 @@ Vector Matriz::operator*(const Vector &v) const {
 
 Matriz::~Matriz(void)
 {
+}
+
+Matriz &Matriz::trasladar(const Vector &vt) {
+	Matriz res(vt.X(), 0.f, 0.f, 0.f, vt.Y(), 0.f, 0.f, 0.f, vt.Z());
+	return multiplicar(*this, res, res);
+}
+
+Matriz &Matriz::rotar(const Vector &eje, float angulo) {
+	Matriz res(eje, angulo);
+	return multiplicar(*this, res, res);
 }
 

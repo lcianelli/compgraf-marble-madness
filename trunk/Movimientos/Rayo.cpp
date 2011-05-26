@@ -9,7 +9,7 @@ Rayo::Rayo(const Vector &punto1, const Vector &punto2) : _P(punto1) {
 bool Rayo::puntosAdyacentes(const Rayo &rayo, Vector &punto1, Vector &punto2) const {
 	if (esValido() && rayo.esValido()) {
 		float temp = Vector::escalar(_V, rayo._V);
-		float temp2 = 1.0 - sqr(temp);
+		float temp2 = 1.0f - sqr(temp);
 		Vector tv;
 		//Checkeamos rayos paralelos
 		if (fabs(temp2) < EPSILON) {
