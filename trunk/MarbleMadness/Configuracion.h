@@ -43,6 +43,7 @@ public:
 	float* getColorLuz(int luz);
 	bool getCambiarLuz();
 
+
 	void setVelocidad(float v);
 	void setInterpolado(bool interpolado);
 	void setTexturas(bool t);
@@ -59,7 +60,7 @@ public:
 	void disminuirG(int id);
 	void disminuirB(int id);
 
-
+	void setDireccionLuz(int id, float* dir);
 };
 
 #endif

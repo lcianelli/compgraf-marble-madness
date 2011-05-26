@@ -7,6 +7,7 @@ MenuGUI::MenuGUI(void)
 	this->x = this->y = this->w = this->h = 0;
 	this->botonCierre = new BotonGUI();
 	this->agegarHijo(botonCierre);
+	this->idTextura = -1;
 	//TODO: inicializar textura del boton de cierre;
 	
 
@@ -20,12 +21,7 @@ MenuGUI::MenuGUI(int x, int y, int w, int h) {
 }
 
 void MenuGUI::dibujar() {
-	/*if (this->idTextura >= 0) {
-		glBindTexture(GL_TEXTURE_2D, this->idTextura);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);	
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);	
-		
-	}*/
+	
 	vector<ObjetoGUI*>::iterator it;
 	for (it = this->hijos.begin(); it != this->hijos.end(); it++) {
 		//glPushMatrix();
@@ -35,17 +31,36 @@ void MenuGUI::dibujar() {
 		glTranslatef(-(float)hijo->X(), -(float)hijo->Y(), 0.f);	
 		//glPopMatrix();	
 	}
-	glColor3f(color.X(), color.Y(), color.Z());
+
+	if (this->idTextura >= 0 && Configuracion::inst()->getTexturas()) {
+		glBindTexture(GL_TEXTURE_2D, idTextura);
+		glEnable( GL_TEXTURE_2D );
+		//NO DESCOMENTARRRR, CAGA TODOOOOOOOOO
+		//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);	
+		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);	
+		
+	} else {
+		glColor3f(color.X(), color.Y(), color.Z());
+	}
+	
 	glBegin(GL_QUADS);
-	//glTexCoord2f(1.0f, 0.0f); 
-	glVertex3f(this->w, 0, 0);
-	//glTexCoord2f(1.0f, 1.0f); 
-	glVertex3f(this->w, this->h, 0);
-	//glTexCoord2f(0.0f, 1.0f); 
-	glVertex3f(0, this->h, 0);
-	//glTexCoord2f(0.0f, 0.0f); 
-	glVertex3f(0, 0, 0);	
+		
+		glTexCoord2f( 0.f, 1.0f );
+		glVertex3f(0, this->h, 0);
+		glTexCoord2f( 0.f, 0.f );
+		glVertex3f(0.f, 0.f,0.f);
+		
+		glTexCoord2f( 1.f, 0.f );
+		glVertex3f(this->w, 0, 0);
+		glTexCoord2f( 1.f, 1.f );
+		glVertex3f(this->w, this->h, 0);
+		
 	glEnd();
+	if (this->idTextura >= 0 && Configuracion::inst()->getTexturas()) {
+		glBindTexture(GL_TEXTURE_2D, 0);//"unbind" :P
+		glDisable( GL_TEXTURE_2D );
+	}
 	
 }
 

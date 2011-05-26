@@ -19,7 +19,9 @@ PantallaPausa::~PantallaPausa(void)
 }
 
 void PantallaPausa::dibujar() {
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_ACCUM_BUFFER_BIT );
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
 	glMatrixMode(GL_MODELVIEW);
 	
 	glEnable(GL_DEPTH_TEST);
@@ -48,13 +50,13 @@ void PantallaPausa::dibujar() {
 			glViewport(0, 0, (GLsizei) s->w, (GLsizei) s->h);
 			glTranslatef(this->menuPausa->X(), this->menuPausa->Y(), 0.f);
 			this->menuPausa->dibujar();			
-			glTranslatef(-this->menuPausa->X(), -this->menuPausa->Y(), 0.f);
-			
+			glTranslatef(-this->menuPausa->X(), -this->menuPausa->Y(), 0.f);			
 		glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 
+	glEnable(GL_LIGHTING);	//glDisable(GL_BLEND);
 	SDL_GL_SwapBuffers();
 }
 
@@ -98,6 +100,9 @@ void PantallaPausa::inicializar() {
 		this->menuPausa = new MenuGUI(s->w/2-200, s->h/2-200, 400, 400);
 		this->menuPausa->Color(Vector(0.f, 1.f, 1.f));
 		this->menuPausa->setPadre(NULL);
+		texFondoId = ManejadorTextura::inst()->cargar("imgs\\menupausa.png");
+		this->menuPausa->setImagen(texFondoId);
+
 		this->resumeBtn = new BotonGUI(50, 150, 50, 20);
 		this->menuPausa->agegarHijo(this->resumeBtn);
 		this->resumeBtn->Color(Vector(1.f, 0.f, 0.f));
@@ -115,7 +120,8 @@ void PantallaPausa::inicializar() {
 	this->ticksIni = SDL_GetTicks();
 	this->ticksFin = this->ticksIni;
 	this->loop = true;
-	//texFondoId = ManejadorTextura::inst()->cargar("C:\\CompGraf\\Obligatorio1\\MarbleMadness\\frogatto-spritesheet1.png");
+	
+	//TextureManager::Inst()->LoadTexture("menupausa.png", texFondoId);
 }
 
 

@@ -114,6 +114,7 @@ void Nivel::dibujar() {
 		//Deshabilito, cambio y vuelvo a habilitar
 		glDisable( GL_LIGHTING );
 		glDisable( GL_LIGHT0 );		
+		glLightfv(GL_LIGHT0, GL_POSITION, Configuracion::inst()->getDireccionLuz(0));
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, Configuracion::inst()->getColorLuz(0));
 		glEnable( GL_LIGHTING );
 		glEnable( GL_LIGHT0 );
