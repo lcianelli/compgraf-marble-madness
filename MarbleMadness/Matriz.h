@@ -25,6 +25,9 @@ public:
 	//Retorna la matriz de traslacion
 	Matriz(float* trasl);
 
+	//Genera la matriz de reflexion respecto al plano indicado. si plano==1 XY, plano==2 XZ plano==3 YZ
+	Matriz(int plano);
+
 	//Retorna la matriz en forma de vector, por columnas.
 	float* getMatrizVector();
 
