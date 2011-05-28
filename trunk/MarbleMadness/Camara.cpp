@@ -17,12 +17,12 @@ Camara::Camara(void)
 	this->puntoVista[1]= 0.0;
 	this->puntoVista[2]= 0.0;
 	this->posicionCamara = new GLfloat[3];
-	this->posicionCamara[0]= 0.0;
-	this->posicionCamara[1]= 10.0;
-	this->posicionCamara[2]= -10.0;
+	this->posicionCamara[0]= 50.0;
+	this->posicionCamara[1]= 50.0;
+	this->posicionCamara[2]= -50.0;
 	this->vectorCamara = new GLfloat[3];
 	this->vectorCamara[0]= 0.0;
-	this->vectorCamara[1]= 1.0;
+	this->vectorCamara[1]= 10.0;
 	this->vectorCamara[2]= 0.0;
 }
 

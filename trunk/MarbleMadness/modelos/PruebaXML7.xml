@@ -1,0 +1,37 @@
+<Matriz n="2" >
+	<Fila>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+	</Fila>
+	<Fila>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="15" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="15" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="15" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+	</Fila>
+	<Fila>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="15" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="10" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="15" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+	</Fila>
+	<Fila>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="15" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="15" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="15" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+	</Fila>
+	<Fila>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="20" alturaSuelo="0" rotacion="0"/>
+	</Fila>
+</Matriz>

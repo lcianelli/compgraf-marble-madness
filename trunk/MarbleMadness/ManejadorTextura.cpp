@@ -1,5 +1,6 @@
 #include "ManejadorTextura.h"
 
+
 ManejadorTextura* ManejadorTextura::_instancia = 0;
 
 

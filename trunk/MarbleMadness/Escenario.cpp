@@ -4,6 +4,7 @@
 #include "Rampa.h"
 
 
+
 Escenario::Escenario(void)
 {
 	for (int i = 0; i < MATRIZ_DIMENSION; i++) {
@@ -11,19 +12,30 @@ Escenario::Escenario(void)
 			this->grilla[i][j] = NULL;
 		}
 	}
+	
 	Ambiente::init();
 }
 
-
-
-
 void Escenario::dondeEstoy(float x, float z, int &t, int &s){
-	t=x/ANCHO_CELDA_GRILLA;
-	s=z/ANCHO_CELDA_GRILLA;
+       int condCaida=(MATRIZ_DIMENSION*ANCHO_CELDA_GRILLA);
+       if(((x<=condCaida)&&(z<=condCaida))&&(x>=0)&&(z>=0))
+       {
+               t=x/ANCHO_CELDA_GRILLA;
+               s=z/ANCHO_CELDA_GRILLA;
+       }
+       else
+       {
+               t=-1;
+               z=-1;
+       }
 }
 
 ObjetoJuego* Escenario::obtenerObjeto(int t, int s){
-	return this->grilla[t][s];
+       if((t==-1)||(s==-1))
+       {
+               return NULL;
+       }else
+               return this->grilla[t][s];
 }
 
 void Escenario::agregarObjeto(ObjetoJuego* obj) {
@@ -53,6 +65,20 @@ void Escenario::dibujar() {
 */
 	//glScaled(MATRIZ_SUELO_W,MATRIZ_SUELO_H,1);
 	//glTranslatef(0,0,-10);
+		/*glBegin(GL_QUADS);
+		glTexCoord2d(0.0, 0.0);
+		glVertex3f(
+		glTexCoord2d(1.0, 0.0);
+
+		glTexCoord2d(1.0, 1.0);
+
+		glTexCoord2d(0.0, 1.0);
+		glEnd();*/
+		
+
+
+
+	glTranslatef(ANCHO_CELDA_GRILLA/2.0,0.0,ANCHO_CELDA_GRILLA/2.0);
 
 	GLfloat escalado;
 	GLfloat translado;
@@ -60,7 +86,7 @@ void Escenario::dibujar() {
 	for(int i=0;i<MATRIZ_DIMENSION;i++){
 		glTranslatef(ANCHO_CELDA_GRILLA*i,0,0);
 		for(int j=0;j<MATRIZ_DIMENSION;j++){
-			glTranslatef(0,0,-ANCHO_CELDA_GRILLA*j);
+			glTranslatef(0,0,ANCHO_CELDA_GRILLA*j);
 
 			escalado = ((float)(this->grilla[i][j])->getAltura())/ANCHO_CELDA_GRILLA;
 			translado = (ANCHO_CELDA_GRILLA/2.0)*escalado + (ANCHO_CELDA_GRILLA/2.0)*(1.0-escalado);
@@ -68,7 +94,7 @@ void Escenario::dibujar() {
 			glTranslatef(0.0,translado,0.0);
 
 			this->grilla[i][j]->dibujar();
-			glTranslatef(0,0,ANCHO_CELDA_GRILLA*j);
+			glTranslatef(0,0,-ANCHO_CELDA_GRILLA*j);
 
 			glTranslatef(0.0,-translado,0.0);
 			glScaled(1,ANCHO_CELDA_GRILLA/((float)(this->grilla[i][j])->getAltura()),1);
@@ -78,20 +104,10 @@ void Escenario::dibujar() {
 	}
 	//glTranslatef(0,0,10);
 	//glScaled(1/MATRIZ_SUELO_W,1/MATRIZ_SUELO_H,1);
+	//glTranslatef(ANCHO_CELDA_GRILLA/2.0,0.0,ANCHO_CELDA_GRILLA/2.0);
 
 }
 
-void Escenario::actualizar(int tiempo) {
-	//TODO: actualizar cosas del escenario, en caso de que las tenga, luces, decorados, etc.
-
-	//Actualizo cada objeto que forma parte de la escena
-
-
-	list<ObjetoEstatico*>::iterator itEst;
-	for (itEst = this->objsEstaticos.begin(); itEst != this->objsEstaticos.end(); itEst++) {
-		(*itEst)->actualizar(tiempo);
-	}
-}
 
 void Escenario::cargarObjeto(int s, int t, float objH, TipoObjeto tipo, int objH2, int rot){
 	ObjetoEstatico* objeto;

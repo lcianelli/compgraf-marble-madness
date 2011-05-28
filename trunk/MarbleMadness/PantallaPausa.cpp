@@ -11,7 +11,7 @@ PantallaPausa::PantallaPausa(void)
 	this->opcionesBtn = 0;
 	this->salirBtn = 0;
 	this->reiniciarBtn = 0;
-	this->menuPausa = 0;
+	this->menuPausa = 0;	
 }
 
 PantallaPausa::~PantallaPausa(void)
@@ -60,6 +60,7 @@ void PantallaPausa::dibujar() {
 	SDL_GL_SwapBuffers();
 }
 
+
 void PantallaPausa::actualizar(int tiempo) {
 	//?? por ahora nada
 }
@@ -103,16 +104,16 @@ void PantallaPausa::inicializar() {
 		texFondoId = ManejadorTextura::inst()->cargar("imgs\\menupausa.png");
 		this->menuPausa->setImagen(texFondoId);
 
-		this->resumeBtn = new BotonGUI(50, 150, 50, 20);
+		this->resumeBtn = new BotonGUI(160, 205, 80, 20);
 		this->menuPausa->agegarHijo(this->resumeBtn);
 		this->resumeBtn->Color(Vector(1.f, 0.f, 0.f));
-		this->opcionesBtn = new BotonGUI(50, 120, 50, 20);
+		this->opcionesBtn = new BotonGUI(160, 180, 80, 20);
 		this->menuPausa->agegarHijo(this->opcionesBtn);
 		this->opcionesBtn->Color(Vector(0.f, 1.f, 0.f));
-		this->salirBtn = new BotonGUI(50, 90, 50, 20);
+		this->salirBtn = new BotonGUI(160, 155, 80, 20);
 		this->menuPausa->agegarHijo(this->salirBtn);
 		this->salirBtn->Color(Vector(0.f, 0.f, 1.f));
-		this->reiniciarBtn = new BotonGUI(50, 60, 50, 20);
+		this->reiniciarBtn = new BotonGUI(160, 125, 50, 20);
 		this->menuPausa->agegarHijo(this->reiniciarBtn);
 		this->reiniciarBtn->Color(Vector(1.f, 1.f, 1.f));
 	}

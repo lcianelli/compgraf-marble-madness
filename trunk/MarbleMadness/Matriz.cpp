@@ -11,6 +11,10 @@ Matriz::Matriz(void) {
 
 //1 es segun el eje x, 2 segun el eje y y 3 segun el eje z
 Matriz::Matriz(float phi,int xyz) {
+
+
+	phi = phi*3.141592654/180.f;
+
 	float c1 = cos(phi);
 	float s1 = sin(phi);	
 	

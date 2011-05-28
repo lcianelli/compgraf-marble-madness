@@ -20,6 +20,7 @@ public:
 	void setAltura(int nuevaAltura);
 	int getAlturaSuelo();
 	void setAlturaSuelo(int nuevaAltura);
+	virtual Vector getNormalInteraccion(float* vectorDireccion, Vector &ptoCara) = 0;
 	virtual ~ObjetoEstatico(void);
 };
 

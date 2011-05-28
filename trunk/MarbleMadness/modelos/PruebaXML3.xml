@@ -1,0 +1,17 @@
+<Matriz n="2" >
+	<Fila>
+		<Objeto tipo="RAMPA" altura="7" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="7" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="7" alturaSuelo="0" rotacion="0"/>
+	</Fila>
+	<Fila>
+		<Objeto tipo="PRISMA" altura="7" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="7" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="7" alturaSuelo="0" rotacion="0"/>
+	</Fila>
+	<Fila>
+		<Objeto tipo="PRISMA" altura="7" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="7" alturaSuelo="0" rotacion="0"/>
+		<Objeto tipo="PRISMA" altura="7" alturaSuelo="0" rotacion="0"/>
+	</Fila>
+</Matriz>

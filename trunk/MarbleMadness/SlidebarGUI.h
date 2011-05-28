@@ -8,7 +8,7 @@
 
 namespace mmgui{
 
-class SlidebarGUI : ObjetoGUI
+class SlidebarGUI : public ObjetoGUI
 {
 protected:
 	float valorMin;
@@ -16,8 +16,8 @@ protected:
 	float valorActual;
 	int idTexturaBarra;
 	int idTexturaMarcador;
-
-
+	Vector colorMarcador;
+	
 public:
 	SlidebarGUI(float min, float max, float inicio);
 	SlidebarGUI(int x, int y, int w, int h, float min, float max, float inicio);
@@ -34,6 +34,8 @@ public:
 	void actualizar(int desplazamiento);
 
 	void dibujar();
+
+	bool clicked(int x, int y);
 
 	~SlidebarGUI(void);
 };
