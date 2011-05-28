@@ -143,3 +143,19 @@ void Configuracion::setDireccionLuz(int id, float* dir) {
 		direccionesLuz[id][i] = dir[i];
 	}
 }
+
+void Configuracion::setVelocidad(float v) {
+	this->velocidad = v;
+}
+
+void Configuracion::setR(int id, float r) {
+	instancia->lucesDifusas[id][0] = r;
+}
+
+void Configuracion::setG(int id, float g) {
+	instancia->lucesDifusas[id][1] = g;
+}
+
+void Configuracion::setB(int id, float b) {
+	instancia->lucesDifusas[id][2] = b;
+}

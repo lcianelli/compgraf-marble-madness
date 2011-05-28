@@ -23,9 +23,11 @@ private:
 	
 	Escenario* escenario;
 	int dimensionEscenario;
-	Personaje* personaje;
+	ObjetoDinamico* personaje;
 	InicioEscenario* inicioNivel;
 	FinEscenario* finNivel;
+
+	GLMmodel* entorno;
 
 	bool fin();
 public:

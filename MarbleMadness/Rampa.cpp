@@ -19,10 +19,10 @@ Rampa::~Rampa(void)
 
 void Rampa::dibujar() {
 
-	glMaterialfv(GL_FRONT_AND_BACK, GL_COLOR_MATERIAL, objeto->materials[1].emmissive);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objeto->materials[1].diffuse);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objeto->materials[1].specular);
-	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, objeto->materials[1].shininess);
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_COLOR_MATERIAL, objeto->materials[1].emmissive);
+    //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, objeto->materials[1].diffuse);
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, objeto->materials[1].specular);
+	//glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, objeto->materials[1].shininess);
 
 
 	//TODO: ver dond meter el define del ancho y largo de las celdas.
@@ -42,7 +42,7 @@ void Rampa::dibujar() {
 
 	glTranslatef(0.0,this->getAlturaSuelo(),0.0);
 
-	glmDraw(objeto, GLM_SMOOTH);
+	glmDraw(objeto, GLM_SMOOTH | GLM_TEXTURE);
 
 	glTranslatef(0.0,-this->getAlturaSuelo(),0.0);
 
@@ -52,36 +52,16 @@ void Rampa::dibujar() {
 
 }
 
-void Rampa::actualizar(int tiempo) {
+Vector Rampa::getNormalInteraccion(float* vectorDireccion, Vector &ptoCara){
 
-}
-
-void Rampa::actualizarFisica(int tiempo) {
-	//nada...
-}
-
-void Rampa::interactuar(list<ObjetoJuego*>* interactores) {
-
-}
-
-
-float* Rampa::getFuerzaAplicada(ObjetoJuego* obj, float &modulo) {
-	float* fuerzaAplicada = new float[3];
-	float* reaccion = getNormalInteraccion(obj);
-	
-	
-	modulo = obj->modfuerza;
-	return fuerza;
-}
-
-
-float* Rampa::getNormalInteraccion(ObjetoJuego* obj) {
-	float * normal = new float[3];
+	//float * normal = new float[3];
 
 	//TODO: almacenar en "normal" los datos de la normal a la cara con la que obj interactua, en la misma direccion desde la que obj "golpea"
 
-	normalizar(normal, 3);
-	return normal;	
+	//normalizar(normal, 3);
+
+	Vector vec = Vector();
+	return vec;	
 }
 
 

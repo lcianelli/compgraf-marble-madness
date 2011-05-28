@@ -70,15 +70,46 @@ void PantallaNivel::dibujar() {
 	//gluLookAt(xpos, 0.5f , zpos + 1.f, xpos, 0.f, zpos, 0.f, 1.f, 0.f); 
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glBegin(GL_QUADS);
-		glColor3ub(0, 0, 255);	
-		float yaux = 0.f;
-		glVertex3f(-2.f, -2.f, yaux);
-		glVertex3f(2.f,-2.f, yaux);
+	//glBegin(GL_QUADS);
+	//	glColor3ub(0, 0, 255);	
+	//	float yaux = 0.f;
+	//	glVertex3f(-2.f, -2.f, yaux);
+	//	glVertex3f(2.f,-2.f, yaux);
+	//
+	//	glVertex3f(2.f, 2.f, yaux);
+	//	glVertex3f(-2.f, 2.f, yaux);
+	//glEnd();
+
+
+	//int texfondo = ManejadorTextura::inst()->cargar("imgs\\texturaFondo.png");
+	//glBindTexture(GL_TEXTURE_2D, texfondo);
+	//glEnable( GL_TEXTURE_2D );
+	//glColor3f(1.0,0.0,0.0);
+
+	//glScalef(sca,sca,1.0);
 	
-		glVertex3f(2.f, 2.f, yaux);
-		glVertex3f(-2.f, 2.f, yaux);
-	glEnd();
+	
+	//glBegin(GL_QUADS);
+	//	// izq, arriba
+	//	glTexCoord2f( 0.0, 1.0 );
+	//	glVertex3f(-100.0,100.0,50.0);
+	//	//glVertex3f(0.5,1.0,-6.0);
+	//	// der, arriba
+	//	glTexCoord2f( 1.0, 1.0 );
+	//	glVertex3f(100.0,100.0,50.0);
+	//	//glVertex3f(2.5,1.0,-6.0);
+	//	// der, abajo
+	//	glTexCoord2f( 1.0, 0.0 );
+	//	glVertex3f(100.0,-100.0,50.0);
+	//	//glVertex3f(2.5,-1.0,-6.0);
+	//	// izq, abajo
+	//	glTexCoord2f( 0.0, 0.0 );
+	//	glVertex3f(-100.0,-100.0,50.0);
+	//	//glVertex3f(0.5,-1.0,-6.0);
+	//glEnd();
+	//glDisable( GL_TEXTURE_2D );
+
+
 
 	this->nivelActual->dibujar();
 	this->hud->dibujarHud();

@@ -9,18 +9,12 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 
+#include "Vector.h"
+
 
 class Rampa : public ObjetoEstatico
 {
 protected:
-	void interactuar(list<ObjetoJuego*>* interactores);
-	/**
-		Retorna el vector unitario de direccion y sentido de la fuerza que aplica este objeto sobre "obj"; el modulo real de la fuerza se retorna en "modulo"
-	*/
-	float* getFuerzaAplicada(ObjetoJuego* obj, float &modulo);
-	
-	float* getNormalInteraccion(ObjetoJuego* obj);
-
 	GLMmodel* objeto;
 
 public:
@@ -30,12 +24,10 @@ public:
 
 	Rampa(void);
 	
-
 	void setAlturaSueloRampa(int nuevaAltura);
+	Vector getNormalInteraccion(float* vectorDireccion, Vector &ptoCara);
 
 	void dibujar();
-	void actualizar(int tiempo);//tiempo = tiempo transcurrido desde ultimo update
-	void actualizarFisica(int tiempo); //tiempo = tiempo transcurrido desde ultimo update
 
 	~Rampa(void);
 };

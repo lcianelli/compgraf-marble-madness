@@ -1,5 +1,6 @@
 #include "PantallaOpciones.h"
 
+SlidebarGUI* draggedObject;
 
 
 PantallaOpciones::PantallaOpciones(void)
@@ -11,6 +12,7 @@ PantallaOpciones::PantallaOpciones(void)
 	for (int i = 0; i < 4; i++) {
 		dirluz[i] = 0;
 	}
+	velBar = 0;
 }
 
 
@@ -23,6 +25,7 @@ PantallaOpciones::~PantallaOpciones(void)
 	for (int i = 0; i < 4; i++) {
 		delete dirluz[i];
 	}
+	delete velBar;
 }
 
 
@@ -114,47 +117,115 @@ void PantallaOpciones::handleKeyDown(SDL_keysym* keysym) {
 void PantallaOpciones::handleMouseDown(const SDL_MouseButtonEvent &ev) {
 
 	if (ev.button == SDL_BUTTON_LEFT) {
+		float luz[4];
 		mouseDown = true;
 		ObjetoGUI* objClick = this->menuOpciones->objetoClickeado(ev.x, s->h-ev.y);
 		if (objClick == this->texturas) {
 			this->texturas->onClick();
+			Configuracion::inst()->setTexturas(this->texturas->isChecked());
 		} else if (objClick == this->interpolado) {
 			this->interpolado->onClick();
+			Configuracion::inst()->setInterpolado(this->interpolado->isChecked());
 		} else if (objClick == this->wireframe) {
 			this->wireframe->onClick();
+			Configuracion::inst()->setWireframe(this->wireframe->isChecked());
 		} else if (objClick == this->dirluz[0]) {
 			this->dirluz[0]->setChecked(true);
 			this->dirluz[1]->setChecked(false);
 			this->dirluz[2]->setChecked(false);
 			this->dirluz[3]->setChecked(false);
+
+			luz[0] = 1.f;
+			luz[1] = 1.f;
+			luz[2] = 1.f;
+			luz[3] = 0.f;
+			Configuracion::inst()->setDireccionLuz(0, luz);
+			Configuracion::inst()->setCambiarLuz(true);
+
 		} else if (objClick == this->dirluz[1]) {
 			this->dirluz[1]->setChecked(true);
 			this->dirluz[0]->setChecked(false);
 			this->dirluz[2]->setChecked(false);
 			this->dirluz[3]->setChecked(false);
+			luz[0] = 1.f;
+			luz[1] = 1.f;
+			luz[2] = -1.f;
+			luz[3] = 0.f;
+			Configuracion::inst()->setDireccionLuz(0, luz);
+			Configuracion::inst()->setCambiarLuz(true);
+
 		} else if (objClick == this->dirluz[2]) {
 			this->dirluz[2]->setChecked(true);
 			this->dirluz[0]->setChecked(false);
 			this->dirluz[1]->setChecked(false);
 			this->dirluz[3]->setChecked(false);
+			
+			luz[0] = -1.f;
+			luz[1] = 1.f;
+			luz[2] = -1.f;
+			luz[3] = 0.f;
+			Configuracion::inst()->setDireccionLuz(0, luz);
+			Configuracion::inst()->setCambiarLuz(true);
 		} else if (objClick == this->dirluz[3]) {
 			this->dirluz[3]->setChecked(true);
 			this->dirluz[1]->setChecked(false);
 			this->dirluz[2]->setChecked(false);
 			this->dirluz[0]->setChecked(false);
+			luz[0] = -1.f;
+			luz[1] = 1.f;
+			luz[2] = 1.f;
+			luz[3] = 0.f;
+			Configuracion::inst()->setDireccionLuz(0, luz);
+			Configuracion::inst()->setCambiarLuz(true);
+		} else if (objClick == this->menuOpciones->getBotonCiere()) {
+			Juego::inst()->pausar();
+		} else if (objClick == this->velBar) {
+			mouseDown = true;
+			draggedObject = dynamic_cast<SlidebarGUI*>(objClick);
+		} else if (objClick == rBar) {
+			mouseDown = true;
+			draggedObject = dynamic_cast<SlidebarGUI*>(objClick);
+		} else if (objClick == gBar) {
+			mouseDown = true;
+			draggedObject = dynamic_cast<SlidebarGUI*>(objClick);
+		} else if (objClick == bBar) {
+			mouseDown = true;
+			draggedObject = dynamic_cast<SlidebarGUI*>(objClick);
+		} else if (objClick == aceptarBtn) {
+			Juego::inst()->pausar();
 		}
 		
 	}
 }
 
 void PantallaOpciones::handleMouseMoved(const SDL_MouseMotionEvent &ev) {
-	/*if (mouseDown) {
-		cout << "mouse Dragged "<< ev.xrel;
-	}*/
+	if (mouseDown && draggedObject != 0) {
+		
+		draggedObject->actualizar(ev.xrel);
+		cout << "Actualize: " << draggedObject->Actual() << endl;
+	}
 }
 
 void PantallaOpciones::handleMouseUp(const SDL_MouseButtonEvent &ev) {
 	mouseDown = false;
+	if (draggedObject != 0) {
+		if (draggedObject == this->velBar) {
+			Configuracion::inst()->setVelocidad(this->velBar->Actual());
+		}
+		if (draggedObject == this->rBar) {
+			Configuracion::inst()->setR(0, this->rBar->Actual());
+			Configuracion::inst()->setCambiarLuz(true);
+		}
+		if (draggedObject == this->gBar) {
+			Configuracion::inst()->setG(0, this->gBar->Actual());
+			Configuracion::inst()->setCambiarLuz(true);
+		}
+		if (draggedObject == this->bBar) {
+			Configuracion::inst()->setB(0, this->bBar->Actual());
+			Configuracion::inst()->setCambiarLuz(true);
+		}
+	}
+	draggedObject = 0;
 }
 
 void PantallaOpciones::resumir() {
@@ -168,25 +239,53 @@ void PantallaOpciones::inicializar() {
 	s = SDL_GetVideoSurface();
 	mouseDown = false;
 	if (this->wireframe == 0) {
+		int menuTexId = ManejadorTextura::inst()->cargar("imgs\\Opciones.png");
 		this->menuOpciones = new MenuGUI(0, 0, s->w, s->h);
 		this->menuOpciones->Color(Vector(1.f, 0.f, 1.f));
 		this->menuOpciones->setPadre(NULL);
-		wireframe = new CheckboxGUI(10, (s->h*3)/4, 10, 10, false);
+		this->menuOpciones->setImagen(menuTexId);
+		wireframe = new CheckboxGUI(270, 416, 15, 15, false);
 		wireframe->Color(Vector(0.f, 1.f, 0.f));
 		this->menuOpciones->agegarHijo(wireframe);
-		interpolado = new CheckboxGUI(10, (s->h*3)/4 - 20, 10, 10, false);
+		interpolado = new CheckboxGUI(270, 383 , 15, 15, false);
 		interpolado->Color(Vector(0.f, 1.f, 0.f));
 		this->menuOpciones->agegarHijo(interpolado);
-		texturas = new CheckboxGUI(10,  (s->h*3)/4 - 40, 10, 10, false);
+		texturas = new CheckboxGUI(270,  350, 15, 15, false);
 		texturas->Color(Vector(0.f, 1.f, 0.f));
 		this->menuOpciones->agegarHijo(texturas);
+		this->velBar = new SlidebarGUI(445, 382, 195, 20, 0.1f, 10.f, 1.0f); 
+		this->velBar->Color(Vector(1.f, 0.f, 1.f));
+		menuOpciones->agegarHijo(this->velBar);
+		this->rBar = new SlidebarGUI(159, 244, 195, 20, 0.f, 1.f, 1.0f); 
+		this->rBar->Color(Vector(1.f, 0.f, 1.f));
+		menuOpciones->agegarHijo(this->rBar); 
+		this->gBar = new SlidebarGUI(159, 215, 195, 20, 0.f, 1.f, 1.0f); 
+		menuOpciones->agegarHijo(this->gBar); 
+		this->bBar = new SlidebarGUI(159, 182, 195, 20, 0.f, 1.f, 1.0f); 
+		menuOpciones->agegarHijo(this->bBar); 
+		//direcciones de la luz
+		dirluz[0] = new CheckboxGUI(472, 243, 18, 18, false);
+		dirluz[0]->Color(Vector(0.f, 1.f, 0.f));
+		this->menuOpciones->agegarHijo(dirluz[0]);
 
-		for (int i = 0; i < 4; i++) {
-			dirluz[i] = new CheckboxGUI((s->w*3)/4 + (i%2)*35, (i < 2) ? s->h/4+30 : s->h/4, 15, 15, false);
-			dirluz[i]->Color(Vector(0.f, 1.f, 0.f));
-			this->menuOpciones->agegarHijo(dirluz[i]);
-		}
+		dirluz[1] = new CheckboxGUI(472, 172, 18, 18, false);
+		dirluz[1]->Color(Vector(0.f, 1.f, 0.f));
+		this->menuOpciones->agegarHijo(dirluz[1]);
+//--done
+		dirluz[2] = new CheckboxGUI(600.f, 243.f, 18, 18, false);
+		dirluz[2]->Color(Vector(0.f, 1.f, 0.f));
+		this->menuOpciones->agegarHijo(dirluz[2]);
+
+		dirluz[3] = new CheckboxGUI(600.f, 172.f, 18, 18, false);
+		dirluz[3]->Color(Vector(0.f, 1.f, 0.f));
+		this->menuOpciones->agegarHijo(dirluz[3]);
+		
 		dirluz[0]->setChecked(true);
+
+
+		aceptarBtn = new BotonGUI(318, 110, 160, 35);
+		aceptarBtn->Color(Vector(1.f, 1.f, 1.f));
+		this->menuOpciones->agegarHijo(aceptarBtn);
 	}
 	
 	this->ticksIni = SDL_GetTicks();

@@ -60,6 +60,10 @@ public:
 	void disminuirG(int id);
 	void disminuirB(int id);
 
+	void setR(int id, float r);
+	void setG(int id, float g);
+	void setB(int id, float b);
+
 	void setDireccionLuz(int id, float* dir);
 };
 

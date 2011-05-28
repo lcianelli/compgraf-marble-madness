@@ -10,6 +10,8 @@
 #include "MenuGUI.h"
 #include "Nivel.h"
 #include "HUD.h"
+#include "ManejadorTextura.h" 
+#include "SlidebarGUI.h"
 
 using namespace mmgui;
 
@@ -19,7 +21,7 @@ private:
 	BotonGUI* aceptarBtn;
 	CheckboxGUI *wireframe, *interpolado, *texturas;
 	CheckboxGUI* dirluz[4];
-
+	SlidebarGUI *velBar, *rBar, *gBar, *bBar;
 	MenuGUI* menuOpciones;
 	bool mouseDown;
 	SDL_Surface* s;
@@ -38,6 +40,7 @@ public:
 
 	inline void setNivel(Nivel* nivel) { this->nivelActual = nivel; }
 	inline void setHud(HUD* hud) { this->hud = hud;}
+	
 	void inicializar();
 
 	void cambiarNivel();

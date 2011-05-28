@@ -42,7 +42,7 @@ void BotonGUI::dibujar() {
 		
 	}*/
 	//glTexCoord2f(1.0f, 0.0f);
-	glBegin(GL_QUADS);
+	/*glBegin(GL_QUADS);
 	glColor3f(color.X(), color.Y(), color.Z());
 	glVertex3f(this->w, 0, 0);
 	//glTexCoord2f(1.0f, 1.0f); 
@@ -51,7 +51,7 @@ void BotonGUI::dibujar() {
 	glVertex3f(0, this->h, 0);
 	//glTexCoord2f(0.0f, 0.0f); 
 	glVertex3f(0, 0, 0);	
-	glEnd();
+	glEnd();*/
 	if (!texto.empty()) {
 		//TODO: dibujar texto
 	}
